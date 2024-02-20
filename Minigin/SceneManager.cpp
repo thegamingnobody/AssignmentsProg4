@@ -1,7 +1,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
-void dae::SceneManager::Update()
+void dae::SceneManager::Update(float const)
 {
 	for(auto& scene : m_scenes)
 	{
