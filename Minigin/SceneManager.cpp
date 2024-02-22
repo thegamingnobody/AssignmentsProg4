@@ -9,6 +9,14 @@ void dae::SceneManager::Update(float const)
 	}
 }
 
+void dae::SceneManager::FixedUpdate(float const)
+{
+	//for (auto& scene : m_scenes)
+	//{
+	//	scene->Update();
+	//}
+}
+
 void dae::SceneManager::Render()
 {
 	for (const auto& scene : m_scenes)
