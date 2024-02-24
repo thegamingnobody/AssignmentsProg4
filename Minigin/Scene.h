@@ -15,6 +15,8 @@ namespace dae
 		void Update();
 		void Render() const;
 
+		std::shared_ptr<GameObject> GetObject(int const index) { return m_objects[index]; }
+
 		~Scene();
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;

@@ -1,7 +1,11 @@
-#pragma once
+#ifndef GAMEOBJECT
+#define GAMEOBJECT
+
 #include <memory>
 #include "Transform.h"
 #include <string>
+#include <vector>
+#include "Component.h"
 
 namespace dae
 {
@@ -17,6 +21,12 @@ namespace dae
 		void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
 
+		template <typename T>
+		void AddComponent(T* component) 
+		{
+			m_pComponents.emplace_back(std::make_unique<T>(component));
+		}
+
 		GameObject() = default;
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
@@ -28,5 +38,8 @@ namespace dae
 		Transform m_transform{};
 		// todo: mmm, every gameobject has a texture? Is that correct?
 		std::shared_ptr<Texture2D> m_texture{};
+
+		std::vector<std::unique_ptr<Component>> m_pComponents{};
 	};
 }
+#endif

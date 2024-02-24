@@ -3,6 +3,7 @@
 #include <string>
 #include <memory>
 #include "Singleton.h"
+#include "GameObject.h"
 
 namespace dae
 {
@@ -16,6 +17,8 @@ namespace dae
 		void FixedUpdate(float const fixedTimeStep);
 
 		void Render();
+
+
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
