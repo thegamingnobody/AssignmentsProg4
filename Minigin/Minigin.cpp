@@ -12,6 +12,8 @@
 #include <chrono>
 #include <thread>
 #include "Scene.h"
+#include "TextComponent.h"
+#include "Font.h"
 
 SDL_Window* g_window{};
 
@@ -85,10 +87,16 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
+	auto& resourceManager = ResourceManager::GetInstance();
 
 
 	auto& scene = sceneManager.CreateScene("Test");
 	auto go = std::make_shared<GameObject>(false);
+
+	std::string const testString{ "Test" };
+	auto font{ resourceManager.LoadFont("Lingua.otf", 36) };
+
+	go.get()->AddComponent<TextComponent>(testString, font);
 	scene.Add(go);
 
 

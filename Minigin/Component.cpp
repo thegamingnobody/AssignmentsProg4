@@ -1,9 +1,17 @@
 #include "Component.h"
 
-//Component::Component(std::shared_ptr<dae::GameObject> gameObject) : 
-//	m_pGameObject(gameObject)
-//{
-//}
+Component::Component() : 
+	m_pGameObject()
+{
+}
+
+void Component::Update()
+{
+}
+
+void Component::Render() const
+{
+}
 
 void Component::SetOwnerObject(std::shared_ptr<dae::GameObject> object)
 {

@@ -10,7 +10,15 @@ dae::GameObject::GameObject(bool const renderable)
 
 dae::GameObject::~GameObject() = default;
 
-void dae::GameObject::Update(){}
+void dae::GameObject::Update()
+{
+	for (auto& component : m_pComponents)
+	{
+		component->Update();
+		m_texture.reset();
+		m_texture = component.get()->GetTexture();
+	}
+}
 
 void dae::GameObject::Render() const
 {

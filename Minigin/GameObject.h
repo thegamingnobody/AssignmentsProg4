@@ -21,10 +21,16 @@ namespace dae
 		void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
 
-		template <typename T>
-		void AddComponent(T* component) 
+		template <class ComponentType, class... Arguments>
+		requires std::derived_from<ComponentType, Component>
+		ComponentType& AddComponent(Arguments&&... arguments)
 		{
-			m_pComponents.emplace_back(std::make_unique<T>(component));
+			auto component{ std::make_shared<ComponentType>(std::forward<Arguments>(arguments)...) };
+			m_pComponents.emplace_back(component);
+
+			component.get()->SetOwnerObject(std::make_shared<GameObject>(this));
+
+			return *component;
 		}
 
 		GameObject(bool const renderable = true);
@@ -41,7 +47,7 @@ namespace dae
 		// todo: mmm, every gameobject has a texture? Is that correct?
 		std::shared_ptr<Texture2D> m_texture{};
 
-		std::vector<std::unique_ptr<Component>> m_pComponents{};
+		std::vector<std::shared_ptr<Component>> m_pComponents{};
 		bool m_Render{ true };
 	};
 }
