@@ -11,6 +11,7 @@
 #include "ResourceManager.h"
 #include <chrono>
 #include <thread>
+#include "Scene.h"
 
 SDL_Window* g_window{};
 
@@ -84,6 +85,12 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
+
+
+	auto& scene = sceneManager.CreateScene("Test");
+	auto go = std::make_shared<GameObject>(false);
+	scene.Add(go);
+
 
 	int constexpr FPS{ 60 };
 

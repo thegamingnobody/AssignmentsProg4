@@ -27,12 +27,14 @@ namespace dae
 			m_pComponents.emplace_back(std::make_unique<T>(component));
 		}
 
-		GameObject() = default;
+		GameObject(bool const renderable = true);
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
+
+		void SetRenderable(bool const renderable) { m_Render = renderable; }
 
 	private:
 		Transform m_transform{};
@@ -40,6 +42,7 @@ namespace dae
 		std::shared_ptr<Texture2D> m_texture{};
 
 		std::vector<std::unique_ptr<Component>> m_pComponents{};
+		bool m_Render{ true };
 	};
 }
 #endif

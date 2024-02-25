@@ -3,12 +3,19 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
+dae::GameObject::GameObject(bool const renderable)
+{
+	m_Render = renderable;
+}
+
 dae::GameObject::~GameObject() = default;
 
 void dae::GameObject::Update(){}
 
 void dae::GameObject::Render() const
 {
+	if (not m_Render) return;
+
 	const auto& pos = m_transform.GetPosition();
 	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
 }
