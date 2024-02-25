@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TRANSFORM
+#define TRANSFORM
 #include <glm/glm.hpp>
 
 namespace dae
@@ -12,3 +13,5 @@ namespace dae
 		glm::vec3 m_position;
 	};
 }
+
+#endif
