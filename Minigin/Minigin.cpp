@@ -100,9 +100,9 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	scene.Add(go);
 
 
-	int constexpr FPS{ 60 };
+	int constexpr targetFPS{ 60 };
 
-	long const ms_per_frame{ static_cast<long>((1.0f / FPS) * 1000) };
+	long const ms_per_frame{ static_cast<long>((1.0f / targetFPS) * 1000) };
 
 	// todo: this update loop could use some work.
 	bool doContinue{ true };

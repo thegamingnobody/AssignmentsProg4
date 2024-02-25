@@ -6,7 +6,7 @@
 #include "Font.h"
 #include "Texture2D.h"
 
-void dae::TextComponent::Update()
+void dae::TextComponent::Update(float const)
 {
 	if (m_needsUpdate)
 	{

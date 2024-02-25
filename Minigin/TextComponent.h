@@ -12,7 +12,7 @@ namespace dae
 	class TextComponent : public Component
 	{
 	public:
-		void Update() override;
+		void Update(float const elapsedTime) override;
 		void Render() const override;
 
 		void SetPosition(float x, float y) { m_transform.SetPosition(x, y, 0.0f); }

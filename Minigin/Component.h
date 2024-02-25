@@ -12,7 +12,7 @@ namespace dae
 class Component 
 {
 public:
-	virtual void Update();
+	virtual void Update(float const elapsedTime);
 	virtual void Render() const;
 
 	void SetOwnerObject(std::shared_ptr<dae::GameObject> object);
