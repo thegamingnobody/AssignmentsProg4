@@ -20,7 +20,7 @@ public:
 
 	virtual std::shared_ptr<dae::Texture2D> GetTexture() = 0;
 
-	Component();
+	Component(std::shared_ptr<dae::GameObject> object);
 	virtual ~Component() = default;
 	Component(const Component& other) = delete;
 	Component(Component&& other) = delete;

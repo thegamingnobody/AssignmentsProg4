@@ -1,6 +1,8 @@
 #include "FPSComponent.h"
+#include "TextComponent.h"
+#include "GameObject.h"
 
-void dae::FPSComponent::Update(float const elapsedTime)
+void dae::FPSComponent::Update(float const)
 {
 	m_FrameCount++;
 
@@ -14,6 +16,20 @@ void dae::FPSComponent::Update(float const elapsedTime)
 		m_FrameCount = 0;
 		m_FpsTimer = std::chrono::high_resolution_clock::now();
 	}
+
+	if (m_SetTextToFPS)
+	{
+		try
+		{
+			auto& textComponent{ m_pGameObject.get()->GetComponent<dae::TextComponent>() };
+			textComponent.SetText(std::to_string(m_CurrentFPS));
+		}
+		catch (const std::runtime_error&)
+		{
+
+		}
+	}
+
 }
 
 void dae::FPSComponent::Render() const
@@ -25,7 +41,8 @@ std::shared_ptr<dae::Texture2D> dae::FPSComponent::GetTexture()
 	return std::shared_ptr<dae::Texture2D>();
 }
 
-dae::FPSComponent::FPSComponent()
+dae::FPSComponent::FPSComponent(std::shared_ptr<dae::GameObject> object, bool setText) : Component(object),
+	 m_SetTextToFPS(setText)
 {
 	m_FpsTimer = std::chrono::high_resolution_clock::now();
 }

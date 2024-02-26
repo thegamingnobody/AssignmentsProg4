@@ -14,6 +14,7 @@
 #include "Scene.h"
 #include "TextComponent.h"
 #include "Font.h"
+#include "FPSComponent.h"
 
 SDL_Window* g_window{};
 
@@ -96,7 +97,9 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	std::string const testString{ "Test" };
 	auto font{ resourceManager.LoadFont("Lingua.otf", 36) };
 
-	go.get()->AddComponent<TextComponent>(testString, font);
+	go.get()->AddComponent<TextComponent>(go, testString, font);
+	go.get()->AddComponent<FPSComponent>(go, true);
+	go.get()->SetPosition(50, 50);
 	scene.Add(go);
 
 

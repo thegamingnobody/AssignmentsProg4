@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include "Component.h"
+#include <iostream>
 
 namespace dae
 {
@@ -15,7 +16,7 @@ namespace dae
 	class GameObject final
 	{
 	public:
-		virtual void Update();
+		virtual void Update(float const elapsedTime);
 		virtual void Render() const;
 
 		void SetTexture(const std::string& filename);
@@ -28,10 +29,41 @@ namespace dae
 			auto component{ std::make_shared<ComponentType>(std::forward<Arguments>(arguments)...) };
 			m_pComponents.emplace_back(component);
 
-			component.get()->SetOwnerObject(std::make_shared<GameObject>(this));
+			component.get()->SetOwnerObject(std::make_shared<GameObject>());
 
 			return *component;
 		}
+
+		//template <class ComponentType>
+		//requires std::derived_from<ComponentType, Component>
+		//bool RemoveComponent()
+		//{
+		//	for (auto& component : m_pComponents)
+		//	{
+		//		if (typeid(component) == typeid(ComponentType))
+		//		{
+		//			std::cout << "Remove\n";
+		//			return true;
+		//		}
+		//	}
+		//	return false;
+		//}
+
+		template <class ComponentType>
+		requires std::derived_from<ComponentType, Component>
+		ComponentType& GetComponent()
+		{
+			for (auto& component : m_pComponents)
+			{
+				if (auto derivedComponent = dynamic_cast<ComponentType*>(component.get()))
+				{
+					return *derivedComponent;
+				}
+			}
+
+			throw std::runtime_error("Component not found");
+		}
+
 
 		GameObject(bool const renderable = true);
 		virtual ~GameObject();

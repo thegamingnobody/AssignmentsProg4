@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+#include "TextComponent.h"
 
 dae::GameObject::GameObject(bool const renderable)
 {
@@ -10,13 +11,17 @@ dae::GameObject::GameObject(bool const renderable)
 
 dae::GameObject::~GameObject() = default;
 
-void dae::GameObject::Update()
+void dae::GameObject::Update(float const elapsedTime)
 {
 	for (auto& component : m_pComponents)
 	{
-		component->Update();
-		m_texture.reset();
-		m_texture = component.get()->GetTexture();
+		component->Update(elapsedTime);
+
+		if (auto derivedComponent = dynamic_cast<dae::TextComponent*>(component.get()))
+		{
+			m_texture.reset();
+			m_texture = component.get()->GetTexture();
+		}
 	}
 }
 

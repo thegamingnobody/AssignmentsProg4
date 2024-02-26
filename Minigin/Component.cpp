@@ -1,7 +1,7 @@
 #include "Component.h"
 
-Component::Component() : 
-	m_pGameObject()
+Component::Component(std::shared_ptr<dae::GameObject> object) :
+	m_pGameObject(object)
 {
 }
 
