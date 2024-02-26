@@ -42,7 +42,7 @@ std::shared_ptr<dae::Texture2D> dae::FPSComponent::GetTexture()
 	return std::shared_ptr<dae::Texture2D>();
 }
 
-dae::FPSComponent::FPSComponent(std::weak_ptr<dae::GameObject> object, bool setText) : Component(object),
+dae::FPSComponent::FPSComponent(dae::GameObject* object, bool setText) : Component(object),
 	 m_SetTextToFPS(setText)
 {
 }

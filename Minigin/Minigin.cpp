@@ -98,9 +98,9 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	std::string const testString{ "Test" };
 	auto fpsFont{ resourceManager.LoadFont("Lingua.otf", fpsSize) };
 
-	go.get()->AddComponent<TextComponent>(go, testString, fpsFont);
-	go.get()->AddComponent<FPSComponent>(go, true);
-	go.get()->SetPosition(fpsOffset, static_cast<float>(m_WindowHeight - fpsOffset - fpsSize));
+	go->AddComponent<TextComponent>(go.get(), testString, fpsFont);
+	go->AddComponent<FPSComponent> (go.get(), true);
+	go->SetPosition(fpsOffset, static_cast<float>(m_WindowHeight - fpsOffset - fpsSize));
 	scene.Add(go);
 
 
