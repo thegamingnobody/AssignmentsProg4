@@ -20,7 +20,7 @@ void dae::GameObject::Update(float const elapsedTime)
 		if (auto derivedComponent = dynamic_cast<dae::TextComponent*>(component.get()))
 		{
 			m_texture.reset();
-			m_texture = component.get()->GetTexture();
+			m_texture = component->GetTexture();
 		}
 	}
 }

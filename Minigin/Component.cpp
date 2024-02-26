@@ -13,13 +13,7 @@ void Component::Render() const
 {
 }
 
-void Component::SetOwnerObject(std::weak_ptr<dae::GameObject> object)
+dae::GameObject* Component::GetOwner() const
 {
-	m_pGameObject.reset();
-	m_pGameObject = object;
-}
-
-std::weak_ptr<dae::GameObject> Component::GetOwner() const
-{
-	return m_pGameObject;
+	return m_pGameObject.lock().get();
 }

@@ -103,22 +103,22 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	scene.Add(go);
 
 
-	int constexpr targetFPS{ 60 };
+	int constexpr targetFPS{ 165 };
 
-	long const ms_per_frame{ static_cast<long>((1.0f / targetFPS) * 1000) };
+	long const msPerFrame{ static_cast<long>((1.0f / targetFPS) * 1000) };
 
 	// todo: this update loop could use some work.
 	bool doContinue{ true };
-	auto last_time{ std::chrono::high_resolution_clock::now() };
+	auto lastTime{ std::chrono::high_resolution_clock::now() };
 	float lag{ 0.0f };
 	float const fixedTimeStep{ 0.02f };
 
 	while (doContinue)
 	{
-		auto const current_time{ std::chrono::high_resolution_clock::now() };
-		float const delta_time{ std::chrono::duration<float>(current_time - last_time).count() };
-		last_time = current_time;
-		lag += delta_time;
+		auto const currentTime{ std::chrono::high_resolution_clock::now() };
+		float const deltaTime{ std::chrono::duration<float>(currentTime - lastTime).count() };
+		lastTime = currentTime;
+		lag += deltaTime;
 
 		doContinue = input.ProcessInput();
 		while (lag >= fixedTimeStep)
@@ -126,11 +126,11 @@ void dae::Minigin::Run(const std::function<void()>& load)
 			sceneManager.FixedUpdate(fixedTimeStep);
 			lag -= fixedTimeStep;
 		}
-		sceneManager.Update(delta_time);
+		sceneManager.Update(deltaTime);
 		renderer.Render();
 
-		const auto sleep_time{ current_time + std::chrono::milliseconds(ms_per_frame) - std::chrono::high_resolution_clock::now() };
+		const auto sleepTime{ currentTime + std::chrono::milliseconds(msPerFrame) - std::chrono::high_resolution_clock::now() };
 
-		std::this_thread::sleep_for(sleep_time);
+		std::this_thread::sleep_for(sleepTime);
 	}
 }

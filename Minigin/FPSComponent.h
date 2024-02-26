@@ -29,8 +29,9 @@ namespace dae
 	private:
 		Transform m_transform{};
 		int m_FrameCount{};
-		std::chrono::high_resolution_clock::time_point m_FpsTimer{};
 		float m_CurrentFPS{};
+		float m_Delay{};
+		float const m_MaxDelay{ 0.75f };
 		bool m_SetTextToFPS{ false };
 	};
 }

@@ -29,8 +29,6 @@ namespace dae
 			auto component{ std::make_shared<ComponentType>(std::forward<Arguments>(arguments)...) };
 			m_pComponents.emplace_back(component);
 
-			//component.get()->SetOwnerObject(std::make_shared<GameObject>(this));
-
 			return *component;
 		}
 
