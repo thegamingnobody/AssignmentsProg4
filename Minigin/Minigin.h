@@ -15,5 +15,9 @@ namespace dae
 		Minigin(Minigin&& other) = delete;
 		Minigin& operator=(const Minigin& other) = delete;
 		Minigin& operator=(Minigin&& other) = delete;
+
+	private:
+		int const m_WindowWidth{ 640 };
+		int const m_WindowHeight{ 480 };
 	};
 }

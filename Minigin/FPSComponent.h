@@ -31,7 +31,7 @@ namespace dae
 		int m_FrameCount{};
 		float m_CurrentFPS{};
 		float m_Delay{};
-		float const m_MaxDelay{ 0.75f };
+		float const m_MaxDelay{ 0.10f };
 		bool m_SetTextToFPS{ false };
 	};
 }

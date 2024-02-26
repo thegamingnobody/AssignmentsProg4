@@ -59,8 +59,8 @@ dae::Minigin::Minigin(const std::string &dataPath)
 		"Programming 4 assignment",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		640,
-		480,
+		m_WindowWidth,
+		m_WindowHeight,
 		SDL_WINDOW_OPENGL
 	);
 	if (g_window == nullptr) 
@@ -90,16 +90,17 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& input = InputManager::GetInstance();
 	auto& resourceManager = ResourceManager::GetInstance();
 
-
 	auto& scene = sceneManager.CreateScene("Test");
 	auto go = std::make_shared<GameObject>(true);
 
+	int const fpsSize{ 27 };
+	int const fpsOffset{ 5 };
 	std::string const testString{ "Test" };
-	auto font{ resourceManager.LoadFont("Lingua.otf", 36) };
+	auto fpsFont{ resourceManager.LoadFont("Lingua.otf", fpsSize) };
 
-	go.get()->AddComponent<TextComponent>(go, testString, font);
+	go.get()->AddComponent<TextComponent>(go, testString, fpsFont);
 	go.get()->AddComponent<FPSComponent>(go, true);
-	go.get()->SetPosition(50, 50);
+	go.get()->SetPosition(fpsOffset, static_cast<float>(m_WindowHeight - fpsOffset - fpsSize));
 	scene.Add(go);
 
 
