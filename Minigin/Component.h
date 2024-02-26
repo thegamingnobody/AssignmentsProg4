@@ -15,12 +15,12 @@ public:
 	virtual void Update(float const elapsedTime);
 	virtual void Render() const;
 
-	void SetOwnerObject(std::shared_ptr<dae::GameObject> object);
-	std::shared_ptr<dae::GameObject> GetOwner() const;
+	void SetOwnerObject(std::weak_ptr<dae::GameObject> object);
+	std::weak_ptr<dae::GameObject> GetOwner() const;
 
 	virtual std::shared_ptr<dae::Texture2D> GetTexture() = 0;
 
-	Component(std::shared_ptr<dae::GameObject> object);
+	Component(std::weak_ptr<dae::GameObject> object);
 	virtual ~Component() = default;
 	Component(const Component& other) = delete;
 	Component(Component&& other) = delete;
@@ -29,6 +29,6 @@ public:
 
 private:
 protected:
-	std::shared_ptr<dae::GameObject> m_pGameObject{};
+	std::weak_ptr<dae::GameObject> m_pGameObject{};
 };
 #endif

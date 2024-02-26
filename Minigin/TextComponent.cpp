@@ -42,7 +42,7 @@ void dae::TextComponent::SetText(const std::string& newText)
 	m_needsUpdate = true;
 }
 
-dae::TextComponent::TextComponent(std::shared_ptr<dae::GameObject> object, const std::string& text, std::shared_ptr<Font> font) : Component(object),
+dae::TextComponent::TextComponent(std::weak_ptr<dae::GameObject> object, const std::string& text, std::shared_ptr<Font> font) : Component(object),
 	m_needsUpdate(true), 
 	m_text(text), 
 	m_font(std::move(font)), 

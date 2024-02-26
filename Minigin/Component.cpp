@@ -1,6 +1,6 @@
 #include "Component.h"
 
-Component::Component(std::shared_ptr<dae::GameObject> object) :
+Component::Component(std::weak_ptr<dae::GameObject> object) :
 	m_pGameObject(object)
 {
 }
@@ -13,13 +13,13 @@ void Component::Render() const
 {
 }
 
-void Component::SetOwnerObject(std::shared_ptr<dae::GameObject> object)
+void Component::SetOwnerObject(std::weak_ptr<dae::GameObject> object)
 {
 	m_pGameObject.reset();
 	m_pGameObject = object;
 }
 
-std::shared_ptr<dae::GameObject> Component::GetOwner() const
+std::weak_ptr<dae::GameObject> Component::GetOwner() const
 {
 	return m_pGameObject;
 }

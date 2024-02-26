@@ -17,10 +17,10 @@ namespace dae
 
 		std::shared_ptr<dae::Texture2D> GetTexture() override;
 
-		int GetFrameCount() { return m_FrameCount; }
-		float GetFPS() { return m_CurrentFPS; }
+		int GetFrameCount() const { return m_FrameCount; }
+		float GetFPS() const { return m_CurrentFPS; }
 
-		FPSComponent(std::shared_ptr<dae::GameObject> object, bool setText = false);
+		FPSComponent(std::weak_ptr<dae::GameObject> object, bool setText = false);
 		virtual ~FPSComponent() override = default;
 		FPSComponent(const FPSComponent& other) = delete;
 		FPSComponent(FPSComponent&& other) = delete;

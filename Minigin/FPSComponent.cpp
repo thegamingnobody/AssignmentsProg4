@@ -21,7 +21,7 @@ void dae::FPSComponent::Update(float const)
 	{
 		try
 		{
-			auto& textComponent{ m_pGameObject.get()->GetComponent<dae::TextComponent>() };
+			auto& textComponent{ m_pGameObject.lock().get()->GetComponent<dae::TextComponent>()};
 			textComponent.SetText(std::to_string(m_CurrentFPS));
 		}
 		catch (const std::runtime_error&)
@@ -41,7 +41,7 @@ std::shared_ptr<dae::Texture2D> dae::FPSComponent::GetTexture()
 	return std::shared_ptr<dae::Texture2D>();
 }
 
-dae::FPSComponent::FPSComponent(std::shared_ptr<dae::GameObject> object, bool setText) : Component(object),
+dae::FPSComponent::FPSComponent(std::weak_ptr<dae::GameObject> object, bool setText) : Component(object),
 	 m_SetTextToFPS(setText)
 {
 	m_FpsTimer = std::chrono::high_resolution_clock::now();

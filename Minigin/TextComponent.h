@@ -22,7 +22,7 @@ namespace dae
 
 		std::shared_ptr<Texture2D> GetTexture() override { return m_textTexture; }
 
-		TextComponent(std::shared_ptr<dae::GameObject> object, const std::string& text, std::shared_ptr<Font> font);
+		TextComponent(std::weak_ptr<dae::GameObject> object, const std::string& text, std::shared_ptr<Font> font);
 		virtual ~TextComponent() override = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;

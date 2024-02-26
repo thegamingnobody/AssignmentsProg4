@@ -92,7 +92,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 
 	auto& scene = sceneManager.CreateScene("Test");
-	auto go = std::make_shared<GameObject>(false);
+	auto go = std::make_shared<GameObject>(true);
 
 	std::string const testString{ "Test" };
 	auto font{ resourceManager.LoadFont("Lingua.otf", 36) };
