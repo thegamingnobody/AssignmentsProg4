@@ -81,28 +81,13 @@ dae::Minigin::~Minigin()
 	SDL_Quit();
 }
 
-void dae::Minigin::Run(const std::function<void()>& load)
+void dae::Minigin::Run(const std::function<void(int const, int const)>& load)
 {
-	load();
+	load(m_WindowWidth, m_WindowHeight);
 
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
-	auto& resourceManager = ResourceManager::GetInstance();
-
-	auto& scene = sceneManager.CreateScene("Test");
-	auto go = std::make_shared<GameObject>(true);
-
-	int const fpsSize{ 27 };
-	int const fpsOffset{ 5 };
-	std::string const testString{ "Test" };
-	auto fpsFont{ resourceManager.LoadFont("Lingua.otf", fpsSize) };
-
-	go->AddComponent<TextComponent>(go.get(), testString, fpsFont);
-	go->AddComponent<FPSComponent> (go.get(), true);
-	go->SetPosition(fpsOffset, static_cast<float>(m_WindowHeight - fpsOffset - fpsSize));
-	scene.Add(go);
-
 
 	int constexpr targetFPS{ 165 };
 
@@ -112,7 +97,6 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	bool doContinue{ true };
 	auto lastTime{ std::chrono::high_resolution_clock::now() };
 	float lag{ 0.0f };
-	float const fixedTimeStep{ 0.02f };
 
 	while (doContinue)
 	{
@@ -122,11 +106,12 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		lag += deltaTime;
 
 		doContinue = input.ProcessInput();
-		while (lag >= fixedTimeStep)
-		{
-			sceneManager.FixedUpdate(fixedTimeStep);
-			lag -= fixedTimeStep;
-		}
+		//float const fixedTimeStep{ 0.02f };
+		//while (lag >= fixedTimeStep)
+		//{
+		//	sceneManager.FixedUpdate(fixedTimeStep);
+		//	lag -= fixedTimeStep;
+		//}
 		sceneManager.Update(deltaTime);
 		renderer.Render();
 

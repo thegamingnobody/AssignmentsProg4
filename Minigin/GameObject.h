@@ -16,8 +16,8 @@ namespace dae
 	class GameObject final
 	{
 	public:
-		virtual void Update(float const elapsedTime);
-		virtual void Render() const;
+		void Update(float const elapsedTime);
+		void Render() const;
 
 		void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
@@ -64,7 +64,7 @@ namespace dae
 
 
 		GameObject(bool const renderable = true);
-		virtual ~GameObject();
+		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
