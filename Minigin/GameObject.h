@@ -10,16 +10,12 @@
 
 namespace dae
 {
-	class Texture2D;
-
-	// todo: this should become final.
 	class GameObject final
 	{
 	public:
 		void Update(float const elapsedTime);
 		void Render() const;
 
-		void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
 
 		template <class ComponentType, class... Arguments>
@@ -62,7 +58,6 @@ namespace dae
 			throw std::runtime_error("Component not found");
 		}
 
-
 		GameObject(bool const renderable = true);
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
@@ -74,8 +69,6 @@ namespace dae
 
 	private:
 		Transform m_transform{};
-		// todo: mmm, every gameobject has a texture? Is that correct?
-		std::shared_ptr<Texture2D> m_texture{};
 
 		std::vector<std::shared_ptr<Component>> m_pComponents{};
 		bool m_Render{ true };

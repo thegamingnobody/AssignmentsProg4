@@ -12,9 +12,6 @@ namespace dae
 	{
 	public:
 		virtual void Update(float const elapsedTime);
-		virtual void Render() const;
-
-		virtual std::shared_ptr<dae::Texture2D> GetTexture() = 0;
 
 		virtual ~Component() = default;
 		Component(const Component& other) = delete;

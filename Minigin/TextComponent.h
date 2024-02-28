@@ -13,14 +13,9 @@ namespace dae
 	{
 	public:
 		void Update(float const elapsedTime) override;
-		void Render() const override;
-
-		void SetPosition(float x, float y) { m_transform.SetPosition(x, y, 0.0f); }
 
 		void SetText(const std::string& newText);
 		std::string& GetText() { return m_text; }
-
-		std::shared_ptr<Texture2D> GetTexture() override { return m_textTexture; }
 
 		TextComponent(dae::GameObject* object, const std::string& text, std::shared_ptr<Font> font);
 		virtual ~TextComponent() override = default;
@@ -32,9 +27,7 @@ namespace dae
 	private:
 		bool m_needsUpdate;
 		std::string m_text{};
-		Transform m_transform{};
 		std::shared_ptr<Font> m_font;
-		std::shared_ptr<Texture2D> m_textTexture;
 	};
 }
 

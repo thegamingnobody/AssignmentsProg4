@@ -9,10 +9,6 @@ void dae::Component::Update(float const)
 {
 }
 
-void dae::Component::Render() const
-{
-}
-
 dae::GameObject* dae::Component::GetOwner() const
 {
 	return m_pGameObject;

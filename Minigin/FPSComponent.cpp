@@ -33,15 +33,6 @@ void dae::FPSComponent::Update(float const elapsedTime)
 
 }
 
-void dae::FPSComponent::Render() const
-{
-}
-
-std::shared_ptr<dae::Texture2D> dae::FPSComponent::GetTexture()
-{
-	return std::shared_ptr<dae::Texture2D>();
-}
-
 dae::FPSComponent::FPSComponent(dae::GameObject* object, bool setText) : Component(object),
 	 m_SetTextToFPS(setText)
 {
