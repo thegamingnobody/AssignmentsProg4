@@ -18,6 +18,8 @@ void dae::GameObject::Update(float const elapsedTime)
 	{
 		component->Update(elapsedTime);
 	}
+
+	m_transform.Move(5, 5, 0);
 }
 
 void dae::GameObject::Render() const
@@ -36,4 +38,9 @@ void dae::GameObject::Render() const
 void dae::GameObject::SetPosition(float x, float y)
 {
 	m_transform.SetPosition(x, y, 0.0f);
+}
+
+void dae::GameObject::SetLoopable(bool const loop)
+{
+	m_transform.SetLoopable(loop);
 }

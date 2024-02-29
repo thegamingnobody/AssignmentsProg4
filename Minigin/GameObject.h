@@ -16,7 +16,8 @@ namespace dae
 		void Update(float const elapsedTime);
 		void Render() const;
 
-		void SetPosition(float x, float y);
+		void SetPosition(float const x, float const y);
+		void SetLoopable(bool const loop);
 
 		template <class ComponentType, class... Arguments>
 		requires std::derived_from<ComponentType, Component>
