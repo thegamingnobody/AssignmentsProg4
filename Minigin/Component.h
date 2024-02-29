@@ -13,6 +13,9 @@ namespace dae
 	public:
 		virtual void Update(float const elapsedTime);
 
+		void SetShouldBeRemoved();
+		bool GetSouldBeRemoved() { return m_ShouldBeRemoved; }
+
 		virtual ~Component() = default;
 		Component(const Component& other) = delete;
 		Component(Component&& other) = delete;
@@ -24,6 +27,7 @@ namespace dae
 	protected:
 		Component(dae::GameObject* object);
 		dae::GameObject* GetOwner() const;
+		bool m_ShouldBeRemoved{ false };
 	};
 }
 #endif

@@ -28,20 +28,26 @@ namespace dae
 			return *component;
 		}
 
-		//template <class ComponentType>
-		//requires std::derived_from<ComponentType, Component>
-		//bool RemoveComponent()
-		//{
-		//	for (auto& component : m_pComponents)
-		//	{
-		//		if (typeid(component) == typeid(ComponentType))
-		//		{
-		//			std::cout << "Remove\n";
-		//			return true;
-		//		}
-		//	}
-		//	return false;
-		//}
+		template <class ComponentType>
+		requires std::derived_from<ComponentType, Component>
+		void RemoveComponent()
+		{
+			for (auto& component : m_pComponents)
+			{
+				if (auto derivedComponent = dynamic_cast<ComponentType*>(component.get()))
+				{
+					component->SetShouldBeRemoved();
+				}
+			}
+
+			for (auto& it { m_pComponents.begin()}; it != m_pComponents.end(); it)
+			{
+				if ((*it)->GetSouldBeRemoved())
+				{
+					it = m_pComponents.erase(it);
+				}
+			}
+		}
 
 		template <class ComponentType>
 		requires std::derived_from<ComponentType, Component>
