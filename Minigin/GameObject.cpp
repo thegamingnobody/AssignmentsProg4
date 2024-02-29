@@ -18,8 +18,6 @@ void dae::GameObject::Update(float const elapsedTime)
 	{
 		component->Update(elapsedTime);
 	}
-
-	m_transform.Move(5, 5, 0);
 }
 
 void dae::GameObject::Render() const

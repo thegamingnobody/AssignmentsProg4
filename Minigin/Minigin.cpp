@@ -81,9 +81,9 @@ dae::Minigin::~Minigin()
 	SDL_Quit();
 }
 
-void dae::Minigin::Run(const std::function<void(int const, int const)>& load)
+void dae::Minigin::Run(const std::function<void()>& load)
 {
-	load(m_WindowWidth, m_WindowHeight);
+	load();
 
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();

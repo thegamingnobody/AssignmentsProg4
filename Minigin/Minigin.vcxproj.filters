@@ -78,6 +78,9 @@
     <ClInclude Include="Transform.h">
       <Filter>Header Files\OtherClasses</Filter>
     </ClInclude>
+    <ClInclude Include="RotatorComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -124,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="Font.cpp">
       <Filter>Source Files\OtherClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="RotatorComponent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
