@@ -32,6 +32,7 @@ void Scene::Update(float const elapsedTime)
 	{
 		object->Update(elapsedTime);
 	}
+
 }
 
 void Scene::Render() const

@@ -18,7 +18,6 @@ namespace dae
 		Transform();
 		Transform(float const x, float const y, float const z);
 
-
 		Transform operator+(const Transform& other) const;
 		Transform operator-() const;
 		Transform operator-(const Transform& other) const;

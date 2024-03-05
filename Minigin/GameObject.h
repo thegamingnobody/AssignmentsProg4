@@ -16,8 +16,13 @@ namespace dae
 		void Update(float const elapsedTime);
 		void Render() const;
 
+		void Move(const Transform& addedPosition);
+		void Move(float const addedX, float const addedY);
 		void SetPosition(float const x, float const y);
 		void SetLoopable(bool const loop);
+		void SetRenderable(bool const renderable) { m_Render = renderable; }
+
+		Transform& GetTransform() { return m_transform; }
 
 		template <class ComponentType, class... Arguments>
 		requires std::derived_from<ComponentType, Component>
@@ -38,14 +43,6 @@ namespace dae
 				if (auto derivedComponent = dynamic_cast<ComponentType*>(component.get()))
 				{
 					component->SetShouldBeRemoved();
-				}
-			}
-
-			for (auto& it { m_pComponents.begin()}; it != m_pComponents.end(); it)
-			{
-				if ((*it)->GetSouldBeRemoved())
-				{
-					it = m_pComponents.erase(it);
 				}
 			}
 		}
@@ -71,8 +68,6 @@ namespace dae
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
-
-		void SetRenderable(bool const renderable) { m_Render = renderable; }
 
 	private:
 		Transform m_transform{};
