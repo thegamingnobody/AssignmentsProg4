@@ -7,9 +7,12 @@ void dae::RotatorComponent::Update(float const elapsedTime)
 
 	m_Angle += (m_Speed / 360) * elapsedTime;
 
-	auto& transformComp	{ owner->GetComponent<Transform>() };
+	auto transformComp{ owner->GetComponent<Transform>() };
 
-	transformComp.SetPosition((cosf(m_Angle) * m_Radius), -(sinf(m_Angle) * m_Radius));
+	if (transformComp.has_value())
+	{
+		transformComp.value()->SetPosition((cosf(m_Angle) * m_Radius), -(sinf(m_Angle) * m_Radius));
+	}
 }
 
 dae::RotatorComponent::RotatorComponent(dae::GameObject* object, float const speed, float const radius) : Component(object)

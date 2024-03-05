@@ -75,11 +75,11 @@
     <ClInclude Include="Singleton.h">
       <Filter>Header Files\OtherClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Header Files\OtherClasses</Filter>
-    </ClInclude>
     <ClInclude Include="RotatorComponent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -122,14 +122,14 @@
     <ClCompile Include="Texture2D.cpp">
       <Filter>Source Files\OtherClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source Files\OtherClasses</Filter>
-    </ClCompile>
     <ClCompile Include="Font.cpp">
       <Filter>Source Files\OtherClasses</Filter>
     </ClCompile>
     <ClCompile Include="RotatorComponent.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

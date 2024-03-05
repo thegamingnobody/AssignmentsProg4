@@ -9,31 +9,19 @@ void dae::FPSComponent::Update(float const elapsedTime)
 
 	if (m_Delay >= m_MaxDelay)
 	{
-		m_CurrentFPS = m_FrameCount/m_Delay;
+		auto textComponent{ GetOwner()->GetComponent<dae::TextComponent>() };
+		if (textComponent.has_value())
+		{
+			std::stringstream stream;
+			stream << std::fixed << std::setprecision(1) << m_FrameCount/m_Delay << " FPS";
+			textComponent.value()->SetText(stream.str());
+		}
 
 		m_FrameCount = 0;
 		m_Delay = 0;
 	}
-
-	if (m_SetTextToFPS)
-	{
-		try
-		{
-			auto& textComponent{ GetOwner()->GetComponent<dae::TextComponent>() };
-
-			std::stringstream stream;
-			stream << std::fixed << std::setprecision(1) << m_CurrentFPS << " FPS";
-			textComponent.SetText(stream.str());
-		}
-		catch (const std::runtime_error&)
-		{
-
-		}
-	}
-
 }
 
-dae::FPSComponent::FPSComponent(dae::GameObject* object, bool setText) : Component(object),
-	 m_SetTextToFPS(setText)
+dae::FPSComponent::FPSComponent(dae::GameObject* object) : Component(object)
 {
 }

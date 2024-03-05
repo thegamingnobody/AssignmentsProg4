@@ -69,21 +69,12 @@ void dae::GameObject::SetParent(GameObject* newParent)
 	m_pOwnerObject->m_pChildObjects.emplace_back(this);
 }
 
-dae::GameObject* dae::GameObject::GetParent() const
+std::optional<dae::GameObject*> dae::GameObject::GetParent() const
 {
 	if (m_pOwnerObject == nullptr)
 	{
-		throw std::runtime_error("No parent");
+		return std::nullopt;
 	}
 	
 	return m_pOwnerObject;
-}
-
-bool dae::GameObject::HasParent()
-{
-	if (m_pOwnerObject)
-	{
-		return true;
-	}
-	return false;
 }

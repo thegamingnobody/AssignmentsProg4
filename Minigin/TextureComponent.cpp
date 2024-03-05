@@ -10,17 +10,16 @@ void dae::TextureComponent::Render() const
 {
 	if (m_Texture != nullptr)
 	{
-		try
+		auto transformComp{ GetOwner()->GetComponent<dae::Transform>() };
+		if (transformComp.has_value())
 		{
-			auto& transformComp{ GetOwner()->GetComponent<dae::Transform>() };
-			auto& pos{ transformComp.GetPosition() };
+			auto& pos{ transformComp.value()->GetPosition()};
 			Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
 		}
-		catch (...)
+		else
 		{
 			Renderer::GetInstance().RenderTexture(*m_Texture, 0.0f, 0.0f);
 		}
-
 	}
 }
 

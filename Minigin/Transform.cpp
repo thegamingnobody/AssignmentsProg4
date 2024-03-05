@@ -4,22 +4,15 @@
 
 void dae::Transform::Update(float const)
 {
-	try
+	auto ParentOfOwner{ GetOwner()->GetParent() };
+	if (not ParentOfOwner.has_value()) return;
+
+	auto TransformComponent{ ParentOfOwner.value()->GetComponent<dae::Transform>()};
+	if (not TransformComponent.has_value()) return;
+
+	if (TransformComponent.value()->GetPosition() + m_LocalPosition != m_WorldPosition)
 	{
-		dae::GameObject* ParentOfOwner{};
-		if (GetOwner()->HasParent())
-		{
-			ParentOfOwner = GetOwner()->GetParent();
-			auto& ParentOfOwnerPos{ ParentOfOwner->GetComponent<dae::Transform>().GetPosition() };
-			if (ParentOfOwnerPos + m_LocalPosition != m_WorldPosition)
-			{
-				m_ShouldUpdate = true;
-			}
-		}
-	}
-	catch (...)
-	{
-		//no error handling needed, if object doesn't have parent or parent of ownerObject has no transform, then local transform is its world transform
+		m_ShouldUpdate = true;
 	}
 }
 
@@ -36,14 +29,20 @@ const glm::vec3& dae::Transform::GetPosition()
 	{
 		m_ShouldUpdate = false;
 
-		try
+		auto ParentOfOwner{ GetOwner()->GetParent() };
+		if (ParentOfOwner.has_value())
 		{
-			auto& ParentOfOwnerPos{ GetOwner()->GetParent()->GetComponent<dae::Transform>().GetPosition() };
-			m_WorldPosition = (ParentOfOwnerPos + m_LocalPosition);
-			return m_WorldPosition;
+			auto TransformComponent{ ParentOfOwner.value()->GetComponent<dae::Transform>() };
+
+			if (TransformComponent.has_value())
+			{
+				m_WorldPosition = (TransformComponent.value()->GetPosition() + m_LocalPosition);
+				return m_WorldPosition;
+			}			
 		}
-		catch (...)
+		else
 		{
+			m_WorldPosition = m_LocalPosition;
 			m_WorldPosition = m_LocalPosition;
 			return m_LocalPosition;
 		}
@@ -83,7 +82,8 @@ void dae::Transform::Move(float const addedX, float const addedY, float const ad
 }
 
 dae::Transform::Transform(dae::GameObject* object) : Component(object),
-	m_LocalPosition()
+	m_LocalPosition(),
+	m_WorldPosition()
 {
 }
 

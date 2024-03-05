@@ -26,8 +26,12 @@ void dae::TextComponent::Update(float const)
 		SDL_FreeSurface(surf);
 
 		auto owner{ GetOwner() };
-		owner->GetComponent<TextureComponent>().SetTexture(std::make_shared<Texture2D>(texture));
-		m_needsUpdate = false;
+		auto textureComponent{ owner->GetComponent<TextureComponent>() };
+		if (textureComponent.has_value())
+		{
+			textureComponent.value()->SetTexture(std::make_shared<Texture2D>(texture));
+			m_needsUpdate = false;
+		}
 	}
 }
 

@@ -7,6 +7,7 @@
 #include <vector>
 #include "Component.h"
 #include <iostream>
+#include <optional>
 
 namespace dae
 {
@@ -19,8 +20,7 @@ namespace dae
 		void SetRenderable(bool const renderable) { m_Render = renderable; }
 
 		void SetParent(GameObject* newParent);
-		GameObject* GetParent() const;
-		bool HasParent();
+		std::optional<GameObject*> GetParent() const;
 
 		template <class ComponentType, class... Arguments>
 		requires std::derived_from<ComponentType, Component>
@@ -47,17 +47,17 @@ namespace dae
 
 		template <class ComponentType>
 		requires std::derived_from<ComponentType, Component>
-		ComponentType& GetComponent() const
+		std::optional<ComponentType*> GetComponent() const
 		{
 			for (auto& component : m_pComponents)
 			{
 				if (auto derivedComponent = dynamic_cast<ComponentType*>(component.get()))
 				{
-					return *derivedComponent;
+					return derivedComponent;
 				}
 			}
 
-			throw std::runtime_error("Component not found");
+			return std::nullopt;
 		}
 
 		GameObject(bool const renderable = true);
