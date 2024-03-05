@@ -5,7 +5,8 @@
 #include "TextComponent.h"
 #include "TextureComponent.h"
 
-dae::GameObject::GameObject(bool const renderable)
+dae::GameObject::GameObject(bool const renderable) : 
+	m_pOwnerObject(nullptr)
 {
 	m_Render = renderable;
 }
@@ -40,27 +41,49 @@ void dae::GameObject::Render() const
 	{
 		if (auto derivedComponent = dynamic_cast<dae::TextureComponent*>(component.get()))
 		{
-			derivedComponent->Render(m_transform);
+			derivedComponent->Render();
 		}
 	}
 }
 
-void dae::GameObject::Move(const Transform& addedPosition)
+void dae::GameObject::SetParent(GameObject* newParent)
 {
-	Move(addedPosition.GetPosition().x, addedPosition.GetPosition().y);
+	//check if new parent is valid
+	if (newParent == nullptr or newParent == this) return;
+
+	//remove child from old parent
+	if (m_pOwnerObject)
+	{
+		auto it = std::find(m_pOwnerObject->m_pChildObjects.begin(), m_pOwnerObject->m_pChildObjects.end(), this);
+
+		if (it != m_pOwnerObject->m_pChildObjects.end())
+		{
+			m_pOwnerObject->m_pChildObjects.erase(it);
+		}
+	}
+
+	//set new parent
+	m_pOwnerObject = newParent;
+
+	//add to parent as child
+	m_pOwnerObject->m_pChildObjects.emplace_back(this);
 }
 
-void dae::GameObject::Move(float const addedX, float const addedY)
+dae::GameObject* dae::GameObject::GetParent() const
 {
-	m_transform.Move(addedX, addedY, 0);
+	if (m_pOwnerObject == nullptr)
+	{
+		throw std::runtime_error("No parent");
+	}
+	
+	return m_pOwnerObject;
 }
 
-void dae::GameObject::SetPosition(float x, float y)
+bool dae::GameObject::HasParent()
 {
-	m_transform.SetPosition(x, y, 0.0f);
-}
-
-void dae::GameObject::SetLoopable(bool const loop)
-{
-	m_transform.SetLoopable(loop);
+	if (m_pOwnerObject)
+	{
+		return true;
+	}
+	return false;
 }

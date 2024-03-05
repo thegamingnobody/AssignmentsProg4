@@ -3,7 +3,6 @@
 
 #include "Component.h"
 #include <string>
-#include "Transform.h"
 
 namespace dae
 {
@@ -12,8 +11,7 @@ namespace dae
     class TextureComponent : public Component
     {
     public:
-        void Render(float const parentX, float const parentY) const;
-        void Render(Transform const& transform) const;
+        void Render() const;
 
         void SetTexture(const std::string& filename);
         void SetTexture(const std::shared_ptr<Texture2D>& texture);

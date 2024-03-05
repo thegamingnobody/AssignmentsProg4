@@ -12,19 +12,17 @@ namespace dae
 
 		void SetSpeed(float const newSpeed) { m_Speed = newSpeed; }
 		void SetRadius(float const newRadius) { m_Radius = newRadius; }
-		void SetCenter(const Transform&  newCenter) { m_Center = newCenter; }
 
-		RotatorComponent(dae::GameObject* object);
+		RotatorComponent(dae::GameObject* object, float const speed = 3000.0f, float const radius = 15.0f);
 		virtual ~RotatorComponent() override = default;
 		RotatorComponent(const RotatorComponent& other) = delete;
 		RotatorComponent(RotatorComponent&& other) = delete;
 		RotatorComponent& operator= (const RotatorComponent& other) = delete;
 		RotatorComponent& operator=(RotatorComponent&& other) = delete;
 	private:
-		float m_Speed{ 3000 };
-		float m_Radius{ 15 };
+		float m_Speed{};
+		float m_Radius{};
 		float m_Angle{};
-		Transform m_Center{};
 	};
 }
 

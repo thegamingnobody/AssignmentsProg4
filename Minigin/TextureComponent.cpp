@@ -2,20 +2,26 @@
 #include "ResourceManager.h"
 #include <iostream>
 #include "Renderer.h"
+#include "Transform.h"
+#include "GameObject.h"
 
 
-void dae::TextureComponent::Render(float const parentX, float const parentY) const
+void dae::TextureComponent::Render() const
 {
 	if (m_Texture != nullptr)
 	{
-		Renderer::GetInstance().RenderTexture(*m_Texture, parentX, parentY);
-	}
-}
+		try
+		{
+			auto& transformComp{ GetOwner()->GetComponent<dae::Transform>() };
+			auto& pos{ transformComp.GetPosition() };
+			Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
+		}
+		catch (...)
+		{
+			Renderer::GetInstance().RenderTexture(*m_Texture, 0.0f, 0.0f);
+		}
 
-void dae::TextureComponent::Render(Transform const& transform) const
-{
-	glm::vec3 const pos{ transform.GetPosition() };
-	Render(pos.x, pos.y);
+	}
 }
 
 void dae::TextureComponent::SetTexture(const std::string& filename)

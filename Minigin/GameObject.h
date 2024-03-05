@@ -16,13 +16,11 @@ namespace dae
 		void Update(float const elapsedTime);
 		void Render() const;
 
-		void Move(const Transform& addedPosition);
-		void Move(float const addedX, float const addedY);
-		void SetPosition(float const x, float const y);
-		void SetLoopable(bool const loop);
 		void SetRenderable(bool const renderable) { m_Render = renderable; }
 
-		Transform& GetTransform() { return m_transform; }
+		void SetParent(GameObject* newParent);
+		GameObject* GetParent() const;
+		bool HasParent();
 
 		template <class ComponentType, class... Arguments>
 		requires std::derived_from<ComponentType, Component>
@@ -49,7 +47,7 @@ namespace dae
 
 		template <class ComponentType>
 		requires std::derived_from<ComponentType, Component>
-		ComponentType& GetComponent()
+		ComponentType& GetComponent() const
 		{
 			for (auto& component : m_pComponents)
 			{
@@ -70,7 +68,8 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 	private:
-		Transform m_transform{};
+		GameObject* m_pOwnerObject{ nullptr };
+		std::vector<GameObject*> m_pChildObjects{};
 
 		std::vector<std::shared_ptr<Component>> m_pComponents{};
 		bool m_Render{ true };

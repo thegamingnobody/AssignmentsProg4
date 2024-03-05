@@ -1,29 +1,35 @@
 #ifndef TRANSFORM
 #define TRANSFORM
 #include <glm/glm.hpp>
+#include "Component.h"
 
 namespace dae
 {
-	class Transform final
+	class Transform : public Component
 	{
 	public:
-		const glm::vec3& GetPosition() const { return m_position; }
-		void SetPosition(float const x, float const y, float const z);
+		void Update(float const elapsedTime) override;
+
+		void Reset();
+		const glm::vec3& GetPosition();
+		void SetPosition(float const x, float const y, float const z = 0);
+
+		void SetShouldUpdate(bool const shouldUpdate) { m_ShouldUpdate = shouldUpdate; }
+		bool GetShouldUpdate() const { return m_ShouldUpdate; }
 
 		void SetLoopable(bool const loop);
 
-		void Move(const Transform& addedPosition);
-		void Move(float const addedX, float const addedY, float const addedZ);
+		void Move(float const addedX, float const addedY, float const addedZ = 0);
 
-		Transform();
-		Transform(float const x, float const y, float const z);
+		Transform(dae::GameObject* object);
+		Transform(dae::GameObject* object, float const x, float const y, float const z);
 
-		Transform operator+(const Transform& other) const;
-		Transform operator-() const;
-		Transform operator-(const Transform& other) const;
 	private:
-		bool m_Loop{false};
-		glm::vec3 m_position;
+		bool m_ShouldUpdate{ true };
+
+		bool m_Loop{ true };
+		glm::vec3 m_LocalPosition;
+		glm::vec3 m_WorldPosition;
 	};
 }
 
