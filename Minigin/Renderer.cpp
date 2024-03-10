@@ -5,6 +5,7 @@
 #include <backends/imgui_impl_sdl2.h>
 #include <backends/imgui_impl_opengl3.h>
 #include "imgui.h"
+#include "TrashTheCache.h"
 
 int GetOpenGLDriverIndex()
 {
@@ -46,7 +47,11 @@ void dae::Renderer::Render() const
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
-	ImGui::ShowDemoWindow();
+
+	Trash::DisplayIntWindow();
+
+	//ImGui::ShowDemoWindow();
+
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
