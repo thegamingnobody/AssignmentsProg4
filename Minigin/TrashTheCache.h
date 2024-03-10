@@ -18,6 +18,7 @@ namespace Trash
     class GameObject
     {
     public:
+        //~GameObject() = default;
         transform* local{};
         int id{};
     };
@@ -29,7 +30,10 @@ namespace Trash
     };
 
     Graph CalculateTrashInt(int const samples);
+    Graph CalculateTrashObject(int const samples);
     void DisplayIntWindow();
+    void DisplayObjectWindow();
+
 }
 
 #endif

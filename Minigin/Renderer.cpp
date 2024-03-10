@@ -49,6 +49,7 @@ void dae::Renderer::Render() const
 	ImGui::NewFrame();
 
 	Trash::DisplayIntWindow();
+	Trash::DisplayObjectWindow();
 
 	//ImGui::ShowDemoWindow();
 
