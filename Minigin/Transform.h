@@ -22,7 +22,7 @@ namespace dae
 		void Move(float const addedX, float const addedY, float const addedZ = 0);
 
 		Transform(dae::GameObject* object);
-		Transform(dae::GameObject* object, float const x, float const y, float const z);
+		Transform(dae::GameObject* object, float const x, float const y, float const z = 0);
 
 	private:
 		bool m_ShouldUpdate{ true };

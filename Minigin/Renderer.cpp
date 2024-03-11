@@ -50,11 +50,6 @@ void dae::Renderer::Render() const
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 
-	//Trash::DisplayIntWindow();
-	//Trash::DisplayObjectWindow();
-
-	//ImGui::ShowDemoWindow();
-
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
