@@ -26,10 +26,13 @@ namespace dae
 		requires std::derived_from<ComponentType, Component>
 		ComponentType& AddComponent(Arguments&&... arguments)
 		{
-			auto component{ std::make_shared<ComponentType>(std::forward<Arguments>(arguments)...) };
-			m_pComponents.emplace_back(component);
+			auto createComponent = [this](auto&&... args) {
+				auto component = std::make_shared<ComponentType>(this, std::forward<decltype(args)>(args)...);
+				m_pComponents.emplace_back(component);
+				return component;
+				};
 
-			return *component;
+			return *createComponent(std::forward<Arguments>(arguments)...);
 		}
 
 		template <class ComponentType>
