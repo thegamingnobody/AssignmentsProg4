@@ -34,6 +34,12 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{71fe9d39-0ee6-43c3-a989-229e098ace84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Commands">
+      <UniqueIdentifier>{fcce5f60-950f-41fd-838f-008d21fca600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Commands">
+      <UniqueIdentifier>{b42defe0-f790-4830-b087-960eabe40a75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -111,8 +117,14 @@
     <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui_plot.h">
       <Filter>imgui</Filter>
     </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
     <ClInclude Include="TrashTheCache.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OtherClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,8 +200,14 @@
     <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui_plot.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
     <ClCompile Include="TrashTheCache.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\OtherClasses</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

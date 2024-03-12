@@ -1,6 +1,5 @@
 #ifndef GAMEOBJECT
 #define GAMEOBJECT
-
 #include <memory>
 #include "Transform.h"
 #include <string>

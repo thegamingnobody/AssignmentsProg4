@@ -91,7 +91,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	int constexpr targetFPS{ 165 };
 
-	long const msPerFrame{ static_cast<long>((1.0f / targetFPS) * 1000) };
+	long const msPerFrame{ static_cast<long>(1000.0f / targetFPS) };
 
 	// todo: this update loop could use some work.
 	bool doContinue{ true };
