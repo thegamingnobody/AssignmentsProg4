@@ -1,6 +1,8 @@
 #pragma once
 #include "Singleton.h"
-
+#include <vector>
+#include <memory>
+#include "Controller.h"
 
 namespace dae
 {
@@ -8,8 +10,10 @@ namespace dae
 	{
 	public:
 		bool ProcessInput();
-	//private:
-	//	XINPUT_STATE m_CurrentState;
+		int AddController();
+
+	private:
+		std::vector<std::unique_ptr<Controller>> m_Controllers;
 	};
 
 }

@@ -5,6 +5,7 @@
 
 class MoveCommand final : public Command 
 {
+public:
 	void Execute(dae::GameObject& actor) override;
 };
 

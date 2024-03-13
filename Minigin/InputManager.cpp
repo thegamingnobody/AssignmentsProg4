@@ -4,6 +4,11 @@
 
 bool dae::InputManager::ProcessInput()
 {
+	for (auto& controller : m_Controllers)
+	{
+		controller->Update();
+	}
+
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) 
 	{
@@ -24,4 +29,12 @@ bool dae::InputManager::ProcessInput()
 	}
 
 	return true;
+}
+
+int dae::InputManager::AddController()
+{
+	int const newControllerId = static_cast<int>(m_Controllers.size());
+	m_Controllers.emplace_back(std::make_unique<Controller>(newControllerId));
+
+	return newControllerId;
 }

@@ -93,7 +93,6 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	long const msPerFrame{ static_cast<long>(1000.0f / targetFPS) };
 
-	// todo: this update loop could use some work.
 	bool doContinue{ true };
 	auto lastTime{ std::chrono::high_resolution_clock::now() };
 	float lag{ 0.0f };
