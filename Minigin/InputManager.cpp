@@ -9,6 +9,19 @@ bool dae::InputManager::ProcessInput()
 		controller->Update();
 	}
 
+	for (auto& controller : m_Controllers)
+	{
+		for (auto& action : m_Actions)
+		{
+			if (controller->GetControllerIndex() != action->GetControllerIndex()) continue;
+
+			if (controller->IsButtonPressed(action->GetButton()))
+			{
+				action->Execute();
+			}
+		}
+	}
+
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) 
 	{
@@ -37,4 +50,11 @@ int dae::InputManager::AddController()
 	m_Controllers.emplace_back(std::make_unique<Controller>(newControllerId));
 
 	return newControllerId;
+}
+
+std::shared_ptr<dae::Action> dae::InputManager::AddAction(Controller::Buttons controllerButton, std::shared_ptr<Command> command, int const controllerIndex)
+{
+	std::shared_ptr<Action> action = std::make_shared<Action>(controllerButton, command, controllerIndex);
+	m_Actions.emplace_back(action);
+	return action;
 }

@@ -1,7 +1,11 @@
 #include "MoveCommand.h"
 
-void MoveCommand::Execute(dae::GameObject& actor)
+dae::MoveCommand::MoveCommand(dae::GameObject* actor) :
+	m_Actor(actor)
 {
-	actor;
-	std::cout << "Move\n";
+}
+
+void dae::MoveCommand::Execute()
+{
+	std::cout << "move\n";
 }

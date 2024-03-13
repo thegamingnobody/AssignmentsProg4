@@ -7,7 +7,7 @@
 
 #include "Controller.h"
 
-class Controller::ControllerImpl
+class dae::Controller::ControllerImpl
 {
 public:
 	ControllerImpl(int const index)
@@ -27,41 +27,40 @@ public:
 		XInputGetState(m_ControllerIndex, &m_CurrentState);
 
 		auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ m_LastState.Gamepad.wButtons;
-		auto buttonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
-		auto buttonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
-
-		if (buttonsPressedThisFrame & XINPUT_GAMEPAD_A)
-		{
-			std::cout << std::fixed << buttonsPressedThisFrame << "\n";
-		}
-		if (buttonsReleasedThisFrame & XINPUT_GAMEPAD_A)
-		{
-			std::cout << std::fixed << buttonsReleasedThisFrame << "\n";
-		}
-			
+		buttonChanges;
+		//auto buttonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
+		//auto buttonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
 	}
+
+	bool IsButtonPressed(int const button) const { return (m_CurrentState.Gamepad.wButtons & button); }
+	int GetControllerIndex() const { return m_ControllerIndex; }
+
 private:
-	void MoveCursorToBeginning()
-	{
-		COORD pos = { 0, 10 };
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-	}
-
 	int m_ControllerIndex{};
 	XINPUT_STATE m_LastState;
 	XINPUT_STATE m_CurrentState;
 };
 
-Controller::Controller(int const index)
+dae::Controller::Controller(int const index)
 {
 	m_Impl = std::make_unique<ControllerImpl>(index);
 }
 
-Controller::~Controller()
+dae::Controller::~Controller()
 {
 }
 
-void Controller::Update()
+void dae::Controller::Update()
 {
 	m_Impl->Update();
+}
+
+bool dae::Controller::IsButtonPressed(const Buttons& button) const
+{
+	return m_Impl->IsButtonPressed(static_cast<int>(button));
+}
+
+int dae::Controller::GetControllerIndex() const
+{
+	return m_Impl->GetControllerIndex();
 }

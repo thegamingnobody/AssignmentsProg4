@@ -7,7 +7,7 @@ class Command
 {
 public:
 	virtual ~Command() = default;
-	virtual void Execute(dae::GameObject& actor) = 0;
+	virtual void Execute() = 0;
 };
 
 #endif

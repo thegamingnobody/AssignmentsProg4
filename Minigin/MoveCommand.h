@@ -3,10 +3,17 @@
 
 #include "Command.h"
 
-class MoveCommand final : public Command 
+namespace dae
 {
-public:
-	void Execute(dae::GameObject& actor) override;
-};
+	class MoveCommand final : public Command
+	{
+	public:
+		MoveCommand(dae::GameObject* actor);
 
+		void Execute() override;
+
+	private:
+		dae::GameObject* m_Actor;
+	};
+}
 #endif
