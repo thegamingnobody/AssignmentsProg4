@@ -8,12 +8,13 @@ namespace dae
 	class MoveCommand final : public Command
 	{
 	public:
-		MoveCommand(dae::GameObject* actor);
+		MoveCommand(dae::GameObject* actor, glm::vec3 direction);
 
 		void Execute() override;
 
 	private:
 		dae::GameObject* m_Actor;
+		glm::vec3 m_Direction;
 	};
 }
 #endif

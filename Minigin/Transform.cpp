@@ -29,6 +29,9 @@ const glm::vec3& dae::Transform::GetPosition()
 	{
 		m_ShouldUpdate = false;
 
+		m_LocalPosition += glm::normalize(m_DirectionThisFrame);
+		m_DirectionThisFrame = glm::vec3(0, 0, 0);
+
 		auto ParentOfOwner{ GetOwner()->GetParent() };
 		if (ParentOfOwner.has_value())
 		{
@@ -68,17 +71,21 @@ void dae::Transform::Move(float const addedX, float const addedY, float const ad
 {
 	m_ShouldUpdate = true;
 
-	if (m_Loop)
-	{
-		m_LocalPosition.x = static_cast<float>(static_cast<int>(m_LocalPosition.x + addedX) % dae::Minigin::m_WindowWidth);
-		m_LocalPosition.y = static_cast<float>(static_cast<int>(m_LocalPosition.y + addedY) % dae::Minigin::m_WindowHeight);
-	}
-	else
-	{
-		m_LocalPosition.x += addedX;
-		m_LocalPosition.y += addedY;
-	}
-	m_LocalPosition.z += addedZ;
+	m_DirectionThisFrame.x += addedX;
+	m_DirectionThisFrame.y += addedY;
+	m_DirectionThisFrame.z += addedZ;
+
+	//if (m_Loop)
+	//{
+	//	m_LocalPosition.x = static_cast<float>(static_cast<int>(m_LocalPosition.x + addedX) % dae::Minigin::m_WindowWidth);
+	//	m_LocalPosition.y = static_cast<float>(static_cast<int>(m_LocalPosition.y + addedY) % dae::Minigin::m_WindowHeight);
+	//}
+	//else
+	//{
+	//	m_LocalPosition.x += addedX;
+	//	m_LocalPosition.y += addedY;
+	//}
+	//m_LocalPosition.z += addedZ;
 }
 
 dae::Transform::Transform(dae::GameObject* object) : Component(object),

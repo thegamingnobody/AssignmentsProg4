@@ -27,6 +27,8 @@ namespace dae
 			X				= 0x4000,	//																		Y
 			Y				= 0x8000,	//																		X
 										//todo: make flag to automatically switch between nintendo mode and xbox mode?
+
+			Dpad			= 0x000F,	//Should detect any dpad input
 		};
 
 		Controller(int const index);

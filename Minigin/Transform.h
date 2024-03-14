@@ -30,6 +30,8 @@ namespace dae
 		bool m_Loop{ true };
 		glm::vec3 m_LocalPosition;
 		glm::vec3 m_WorldPosition;
+
+		glm::vec3 m_DirectionThisFrame;
 	};
 }
 
