@@ -9,17 +9,42 @@ bool dae::InputManager::ProcessInput()
 		controller->Update();
 	}
 
-	for (auto& controller : m_Controllers)
+	for (auto& keyboard : m_Keyboards)
 	{
-		for (auto& action : m_Actions)
-		{
-			if (controller->GetControllerIndex() != action->GetControllerIndex()) continue;
+		keyboard->Update();
+	}
 
-			if (controller->IsButtonPressed(action->GetButton()))
+	for (auto& action : m_Actions)
+	{
+		switch (action->GetInputMode())
+		{
+		case Action::InputMode::Controller:
+			for (auto& controller : m_Controllers)
 			{
-				action->Execute();
+				if (controller->GetPlayerNumber() != action->GetPlayerNumber()) continue;
+
+				if (controller->IsButtonPressed(action->GetButton()))
+				{
+					action->Execute();
+				}
 			}
+			break;
+		case Action::InputMode::Keyboard:
+			for (auto& keyboard : m_Keyboards)
+			{
+				if (keyboard->GetKeyboardIndex() != action->GetPlayerNumber()) continue;
+
+				if (keyboard->IsButtonPressed(action->GetKey()))
+				{
+					action->Execute();
+				}
+			}
+			break;
+		default:
+			break;
 		}
+
+
 	}
 
 	SDL_Event e;
@@ -29,14 +54,6 @@ bool dae::InputManager::ProcessInput()
 		{
 			return false;
 		}
-		if (e.type == SDL_KEYDOWN) 
-		{
-			
-		}
-		if (e.type == SDL_MOUSEBUTTONDOWN) 
-		{
-			
-		}
 
 		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
@@ -44,17 +61,36 @@ bool dae::InputManager::ProcessInput()
 	return true;
 }
 
-int dae::InputManager::AddController()
+int dae::InputManager::AddController(const Action::InputMode& inputMode)
 {
-	int const newControllerId = static_cast<int>(m_Controllers.size());
-	m_Controllers.emplace_back(std::make_unique<Controller>(newControllerId));
+	int newPlayerNumber{};
+	switch (inputMode)
+	{
+	case Action::InputMode::Controller:
+		newPlayerNumber = static_cast<int>(m_Controllers.size());
+		m_Controllers.emplace_back(std::make_unique<Controller>(newPlayerNumber));
+		break;
+	case Action::InputMode::Keyboard:
+		newPlayerNumber = static_cast<int>(m_Keyboards.size());
+		m_Keyboards.emplace_back(std::make_unique<Keyboard>(newPlayerNumber));
+		break;
+	default:
+		break;
+	}
 
-	return newControllerId;
+	return newPlayerNumber;
 }
 
-std::shared_ptr<dae::Action> dae::InputManager::AddAction(Controller::Buttons controllerButton, std::shared_ptr<Command> command, int const controllerIndex)
+std::shared_ptr<dae::Action> dae::InputManager::AddAction(const Controller::Buttons& controllerButton, std::shared_ptr<Command> command, int const playerNumber)
 {
-	std::shared_ptr<Action> action = std::make_shared<Action>(controllerButton, command, controllerIndex);
+	std::shared_ptr<Action> action = std::make_shared<Action>(controllerButton, command, playerNumber);
+	m_Actions.emplace_back(action);
+	return action;
+}
+
+std::shared_ptr<dae::Action> dae::InputManager::AddAction(const Keyboard::Buttons& keyboardKey, std::shared_ptr<Command> command, int const playerNumber)
+{
+	std::shared_ptr<Action> action = std::make_shared<Action>(keyboardKey, command, playerNumber);
 	m_Actions.emplace_back(action);
 	return action;
 }

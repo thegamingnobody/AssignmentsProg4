@@ -27,8 +27,6 @@ namespace dae
 			X				= 0x4000,	//																		Y
 			Y				= 0x8000,	//																		X
 										//todo: make flag to automatically switch between nintendo mode and xbox mode?
-
-			Dpad			= 0x000F,	//Should detect any dpad input
 		};
 
 		Controller(int const index);
@@ -37,7 +35,7 @@ namespace dae
 		void Update();
 
 		bool IsButtonPressed(const Buttons& button) const;
-		int GetControllerIndex() const;
+		int GetPlayerNumber() const;
 
 	private: 
 		class ControllerImpl;

@@ -16,7 +16,7 @@ public:
 		ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
 		if (index != -1)
 		{
-			m_ControllerIndex = index;
+			m_PlayerNumber = index;
 		}
 	}
 
@@ -24,7 +24,7 @@ public:
 	{
 		CopyMemory(&m_LastState, &m_CurrentState, sizeof(XINPUT_STATE));
 		ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-		XInputGetState(m_ControllerIndex, &m_CurrentState);
+		XInputGetState(m_PlayerNumber, &m_CurrentState);
 
 		auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ m_LastState.Gamepad.wButtons;
 		buttonChanges;
@@ -33,10 +33,10 @@ public:
 	}
 
 	bool IsButtonPressed(int const button) const { return (m_CurrentState.Gamepad.wButtons & button); }
-	int GetControllerIndex() const { return m_ControllerIndex; }
+	int GetPlayerNumber() const { return m_PlayerNumber; }
 
 private:
-	int m_ControllerIndex{};
+	int m_PlayerNumber{};
 	XINPUT_STATE m_LastState;
 	XINPUT_STATE m_CurrentState;
 };
@@ -60,7 +60,7 @@ bool dae::Controller::IsButtonPressed(const Buttons& button) const
 	return m_Impl->IsButtonPressed(static_cast<int>(button));
 }
 
-int dae::Controller::GetControllerIndex() const
+int dae::Controller::GetPlayerNumber() const
 {
-	return m_Impl->GetControllerIndex();
+	return m_Impl->GetPlayerNumber();
 }
