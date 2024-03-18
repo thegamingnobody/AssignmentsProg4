@@ -2,6 +2,7 @@
 #define ROTATORCOMPONENT
 #include "Component.h"
 #include "Transform.h"
+#include <optional>
 
 namespace dae
 {
@@ -23,6 +24,7 @@ namespace dae
 		float m_Speed{};
 		float m_Radius{};
 		float m_Angle{};
+		std::optional<Transform*> m_OwnerTransformComponent;
 	};
 }
 

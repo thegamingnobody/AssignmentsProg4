@@ -4,6 +4,7 @@
 
 void dae::Transform::Update(float const)
 {
+
 	auto ParentOfOwner{ GetOwner()->GetParent() };
 	if (not ParentOfOwner.has_value()) return;
 
@@ -18,9 +19,8 @@ void dae::Transform::Update(float const)
 
 void dae::Transform::Reset()
 {
-	m_LocalPosition.x = 0.0f;
-	m_LocalPosition.y = 0.0f;
-	m_LocalPosition.z = 0.0f;
+	m_LocalPosition = glm::vec3(0, 0, 0);
+	m_DirectionThisFrame = glm::vec3(0, 0, 0);
 }
 
 const glm::vec3& dae::Transform::GetPosition()
@@ -29,8 +29,11 @@ const glm::vec3& dae::Transform::GetPosition()
 	{
 		m_ShouldUpdate = false;
 
-		m_LocalPosition += glm::normalize(m_DirectionThisFrame);
-		m_DirectionThisFrame = glm::vec3(0, 0, 0);
+		if (not(m_DirectionThisFrame.x == 0.0f and m_DirectionThisFrame.y == 0.0f and m_DirectionThisFrame.z == 0.0f))
+		{
+			m_LocalPosition += glm::normalize(m_DirectionThisFrame);
+			m_DirectionThisFrame = glm::vec3(0, 0, 0);
+		}
 
 		auto ParentOfOwner{ GetOwner()->GetParent() };
 		if (ParentOfOwner.has_value())
@@ -88,9 +91,10 @@ void dae::Transform::Move(float const addedX, float const addedY, float const ad
 	//m_LocalPosition.z += addedZ;
 }
 
-dae::Transform::Transform(dae::GameObject* object) : Component(object),
-	m_LocalPosition(),
-	m_WorldPosition()
+dae::Transform::Transform(dae::GameObject* object) : Component(object)
+	, m_LocalPosition()
+	, m_WorldPosition()
+	, m_DirectionThisFrame()
 {
 }
 

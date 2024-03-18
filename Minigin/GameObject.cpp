@@ -67,6 +67,14 @@ void dae::GameObject::SetParent(GameObject* newParent)
 
 	//add to parent as child
 	m_pOwnerObject->m_pChildObjects.emplace_back(this);
+
+	auto transformThis{ GetComponent<Transform>() };
+	auto transformOwner{ m_pOwnerObject->GetComponent<Transform>() };
+
+	if (transformThis.has_value() and transformOwner.has_value())
+	{
+		transformThis.value()->SetShouldUpdate(true);
+	}
 }
 
 std::optional<dae::GameObject*> dae::GameObject::GetParent() const
