@@ -30,8 +30,9 @@ namespace dae
 	private:
 		int m_PlayerNumber;
 
-		ControllerButtons m_ControllerInput;
-		KeyboardKeys m_KeyboardInput;
+		int m_ButtonValue;
+		//ControllerButtons m_ControllerInput;
+		//KeyboardKeys m_KeyboardInput;
 		std::shared_ptr<Command> m_Command;
 		DeviceType m_InputMode;
 	};

@@ -102,7 +102,6 @@
 			B = 0x2000,	//																		A
 			X = 0x4000,	//																		Y
 			Y = 0x8000,	//																		X
-			//todo: make flag to automatically switch between nintendo mode and xbox mode?
 		};
 	}
 
