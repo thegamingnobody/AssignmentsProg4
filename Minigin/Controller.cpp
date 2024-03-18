@@ -55,9 +55,9 @@ void dae::Controller::Update()
 	m_Impl->Update();
 }
 
-bool dae::Controller::IsButtonPressed(const Buttons& button) const
+bool dae::Controller::IsButtonPressed(int const button) const
 {
-	return m_Impl->IsButtonPressed(static_cast<int>(button));
+	return m_Impl->IsButtonPressed(button);
 }
 
 int dae::Controller::GetPlayerNumber() const

@@ -1,13 +1,15 @@
-#ifndef COMMAND
-#define COMMAND
+#ifndef DAE_COMMAND
+#define DAE_COMMAND
 
 #include "GameObject.h"
-
-class Command
+namespace dae
 {
-public:
-	virtual ~Command() = default;
-	virtual void Execute() = 0;
-};
+	class Command
+	{
+	public:
+		virtual ~Command() = default;
+		virtual void Execute() = 0;
+	};
+}
 
 #endif

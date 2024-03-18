@@ -25,7 +25,7 @@ public:
 		CopyMemory(&m_CurrentState, &currentState, sizeof(Uint8*));
 	}
 
-	bool IsButtonPressed(const Buttons& button) const { return (m_CurrentState[static_cast<int>(button)]); }
+	bool IsButtonPressed(const int button) const { return (m_CurrentState[button]); }
 	int GetPlayerNumber() const { return m_PlayerNumber; }
 private:
 	int m_PlayerNumber{};
@@ -47,12 +47,12 @@ void dae::Keyboard::Update()
 	m_Impl->Update();
 }
 
-bool dae::Keyboard::IsButtonPressed(const Buttons& button) const
+bool dae::Keyboard::IsButtonPressed(const int button) const
 {
 	return m_Impl->IsButtonPressed(button);
 }
 
-int dae::Keyboard::GetKeyboardIndex() const
+int dae::Keyboard::GetPlayerNumber() const
 {
 	return m_Impl->GetPlayerNumber();
 }

@@ -1,6 +1,6 @@
 #include "Action.h"
 
-dae::Action::Action(const Controller::Buttons& controllerButton, std::shared_ptr<Command> command, int const playerNumber) :
+dae::Action::Action(const ControllerButtons& controllerButton, std::shared_ptr<Command> command, int const playerNumber) :
 	m_PlayerNumber		(playerNumber),
 	m_ControllerInput	(controllerButton),
 	m_KeyboardInput		(),
@@ -9,7 +9,7 @@ dae::Action::Action(const Controller::Buttons& controllerButton, std::shared_ptr
 {
 }
 
-dae::Action::Action(const Keyboard::Buttons& keyboardKey, std::shared_ptr<Command> command, int const playerNumber) :
+dae::Action::Action(const KeyboardKeys& keyboardKey, std::shared_ptr<Command> command, int const playerNumber) :
 	m_PlayerNumber		(playerNumber),
 	m_ControllerInput	(),
 	m_KeyboardInput		(keyboardKey),
@@ -21,4 +21,18 @@ dae::Action::Action(const Keyboard::Buttons& keyboardKey, std::shared_ptr<Comman
 void dae::Action::Execute()
 {
 	m_Command->Execute();
+}
+
+int dae::Action::GetButton() const
+{
+	switch (m_InputMode)
+	{
+	case dae::Action::InputMode::Controller:
+		return static_cast<int>(m_ControllerInput);
+	case dae::Action::InputMode::Keyboard:
+		return static_cast<int>(m_KeyboardInput);
+	default:
+		break;
+	}
+	return 0;
 }
