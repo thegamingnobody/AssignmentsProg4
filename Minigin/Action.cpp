@@ -5,7 +5,7 @@ dae::Action::Action(const ControllerButtons& controllerButton, std::shared_ptr<C
 	m_ControllerInput	(controllerButton),
 	m_KeyboardInput		(),
 	m_Command			(command),
-	m_InputMode			(InputMode::Controller)
+	m_InputMode			(DeviceType::Controller)
 {
 }
 
@@ -14,7 +14,7 @@ dae::Action::Action(const KeyboardKeys& keyboardKey, std::shared_ptr<Command> co
 	m_ControllerInput	(),
 	m_KeyboardInput		(keyboardKey),
 	m_Command			(command),
-	m_InputMode			(InputMode::Keyboard)
+	m_InputMode			(DeviceType::Keyboard)
 {
 }
 
@@ -27,9 +27,9 @@ int dae::Action::GetButton() const
 {
 	switch (m_InputMode)
 	{
-	case dae::Action::InputMode::Controller:
+	case dae::Action::DeviceType::Controller:
 		return static_cast<int>(m_ControllerInput);
-	case dae::Action::InputMode::Keyboard:
+	case dae::Action::DeviceType::Keyboard:
 		return static_cast<int>(m_KeyboardInput);
 	default:
 		break;

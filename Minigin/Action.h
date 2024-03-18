@@ -11,7 +11,7 @@ namespace dae
 	class Action
 	{
 	public:
-		enum class InputMode 
+		enum class DeviceType 
 		{
 			Controller,
 			Keyboard
@@ -24,7 +24,7 @@ namespace dae
 
 		int GetButton()				const;
 		int GetPlayerNumber()		const { return m_PlayerNumber; }
-		InputMode GetInputMode()	const { return m_InputMode; }
+		DeviceType GetInputMode()	const { return m_InputMode; }
 
 
 	private:
@@ -33,7 +33,7 @@ namespace dae
 		ControllerButtons m_ControllerInput;
 		KeyboardKeys m_KeyboardInput;
 		std::shared_ptr<Command> m_Command;
-		InputMode m_InputMode;
+		DeviceType m_InputMode;
 	};
 }
 #endif

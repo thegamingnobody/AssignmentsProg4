@@ -36,16 +36,16 @@ bool dae::InputManager::ProcessInput()
 	return true;
 }
 
-int dae::InputManager::AddController(const Action::InputMode& inputMode)
+int dae::InputManager::AddController(const Action::DeviceType& DeviceType)
 {
 	int const newPlayerNumber{ static_cast<int>(m_InputDevices.size()) };
 
-	switch (inputMode)
+	switch (DeviceType)
 	{
-	case Action::InputMode::Controller:
+	case Action::DeviceType::Controller:
 		m_InputDevices.emplace_back(std::make_unique<Controller>(newPlayerNumber));
 		break;
-	case Action::InputMode::Keyboard:
+	case Action::DeviceType::Keyboard:
 		m_InputDevices.emplace_back(std::make_unique<Keyboard>(newPlayerNumber));
 		break;
 	default:

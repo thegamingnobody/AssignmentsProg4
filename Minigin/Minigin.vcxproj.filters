@@ -141,10 +141,10 @@
     <ClInclude Include="Keyboard.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="InputDevice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ButtonEnums.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputDevice.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
@@ -240,7 +240,7 @@
       <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="InputDevice.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

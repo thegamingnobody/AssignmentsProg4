@@ -14,7 +14,7 @@ namespace dae
 
 	private:
 		dae::GameObject* m_Actor;
-		glm::vec3 m_Direction;
+		const glm::vec3 m_Direction;
 	};
 }
 #endif
