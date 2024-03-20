@@ -16,6 +16,11 @@
 #include "Font.h"
 #include "FPSComponent.h"
 
+#pragma warning (push)
+#pragma warning (disable: 4996)
+#include "steam/steam_api.h"
+#pragma warning (pop)
+
 SDL_Window* g_window{};
 
 void PrintSDLVersion()
@@ -103,6 +108,8 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		float const deltaTime{ std::chrono::duration<float>(currentTime - lastTime).count() };
 		lastTime = currentTime;
 		lag += deltaTime;
+
+		SteamAPI_RunCallbacks();
 
 		doContinue = input.ProcessInput();
 		//float const fixedTimeStep{ 0.02f };
