@@ -98,10 +98,17 @@
 			ShoulderLeft = 0x0100,
 			ShoulderRight = 0x0200,
 
-			A = 0x1000,	//These are the xbox buttons, on nintendo systems the names should be:  B	to get the name and value matched  
-			B = 0x2000,	//																		A
-			X = 0x4000,	//																		Y
-			Y = 0x8000,	//																		X
+			FaceButtonDown	= 0x1000,
+			FaceButtonRight	= 0x2000,
+			FaceButtonLeft	= 0x4000,
+			FaceButtonUp	= 0x8000,
+		};
+
+		enum class InputType
+		{
+			PressedThisFrame,
+			Held,
+			ReleasedThisFrame
 		};
 	}
 

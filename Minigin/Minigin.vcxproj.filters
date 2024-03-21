@@ -285,6 +285,12 @@
     <ClInclude Include="..\3rdParty\steamworks\public\steam\steamuniverse.h">
       <Filter>steam</Filter>
     </ClInclude>
+    <ClInclude Include="CountersCommand.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="CountersComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -379,6 +385,12 @@
     </ClCompile>
     <ClCompile Include="InputDevice.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="CountersCommand.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="CountersComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
