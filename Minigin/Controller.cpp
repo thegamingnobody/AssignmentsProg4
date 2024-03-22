@@ -26,13 +26,26 @@ public:
 		ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
 		XInputGetState(m_PlayerNumber, &m_CurrentState);
 
-		auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ m_LastState.Gamepad.wButtons;
-		buttonChanges;
-		//auto buttonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
-		//auto buttonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
 	}
 
-	bool IsButtonPressed(int const button) const { return (m_CurrentState.Gamepad.wButtons & button); }
+	bool IsButtonPressed(int const button, const InputType& inputType) const 
+	{
+		auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ m_LastState.Gamepad.wButtons;
+		buttonChanges;
+		auto buttonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
+		auto buttonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
+		switch (inputType)
+		{
+		case dae::InputType::PressedThisFrame:
+			return (buttonsPressedThisFrame & button);
+		case dae::InputType::Held:
+			return (m_CurrentState.Gamepad.wButtons & button); 
+		case dae::InputType::ReleasedThisFrame:
+			return (buttonsReleasedThisFrame & button);
+		default:
+			return false;
+		}
+	}
 	int GetPlayerNumber() const { return m_PlayerNumber; }
 
 private:
@@ -55,9 +68,9 @@ void dae::Controller::Update()
 	m_Impl->Update();
 }
 
-bool dae::Controller::IsButtonPressed(int const button) const
+bool dae::Controller::IsButtonPressed(int const button, const InputType& inputType) const
 {
-	return m_Impl->IsButtonPressed(button);
+	return m_Impl->IsButtonPressed(button, inputType);
 }
 
 int dae::Controller::GetPlayerNumber() const

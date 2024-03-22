@@ -15,8 +15,8 @@ namespace dae
 		bool ProcessInput();
 		
 		int AddController(const Action::DeviceType& DeviceType);
-		std::shared_ptr<Action> AddAction(const ControllerButtons& controllerButton, std::shared_ptr<Command> command, int const playerNumber);
-		std::shared_ptr<Action> AddAction(const KeyboardKeys& keyboardKey, std::shared_ptr<Command> command, int const playerNumber);
+		std::shared_ptr<Action> AddAction(const ControllerButtons& controllerButton, const InputType& inputType, std::shared_ptr<Command> command, int const playerNumber);
+		std::shared_ptr<Action> AddAction(const KeyboardKeys& keyboardKey, const InputType& inputType, std::shared_ptr<Command> command, int const playerNumber);
 
 	private:
 		std::vector<std::unique_ptr<InputDevice>> m_InputDevices;

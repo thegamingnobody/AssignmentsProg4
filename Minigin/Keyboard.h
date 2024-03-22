@@ -14,7 +14,7 @@ namespace dae
 
 		void Update() override;
 
-		bool IsButtonPressed(const int button) const override;
+		bool IsButtonPressed(const int button, const InputType& inputType) const override;
 
 		int GetPlayerNumber() const override;
 

@@ -11,7 +11,7 @@ namespace dae
 		virtual ~InputDevice() = default;
 		virtual void Update() = 0;
 		virtual int GetPlayerNumber() const = 0;
-		virtual bool IsButtonPressed(int const button) const = 0;
+		virtual bool IsButtonPressed(int const button, const InputType& inputType) const = 0;
 	};	
 }
 

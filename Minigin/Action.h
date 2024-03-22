@@ -17,24 +17,24 @@ namespace dae
 			Keyboard
 		};
 
-		Action(const ControllerButtons& controllerButton, std::shared_ptr<Command> command, int const playerNumber);
-		Action(const KeyboardKeys& keyboardKey, std::shared_ptr<Command> command, int const playerNumber);
+		Action(const ControllerButtons& controllerButton,	const InputType& inputType,	std::shared_ptr<Command> command, int const playerNumber);
+		Action(const KeyboardKeys& keyboardKey,				const InputType& inputType,	std::shared_ptr<Command> command, int const playerNumber);
 
 		void Execute();
 
 		int GetButton()				const;
 		int GetPlayerNumber()		const { return m_PlayerNumber; }
-		DeviceType GetInputMode()	const { return m_InputMode; }
+		DeviceType GetDeviceType()	const { return m_DeviceType; }
+		InputType GetInputType()	const { return m_InputType; }
 
 
 	private:
 		int m_PlayerNumber;
 
 		int m_ButtonValue;
-		//ControllerButtons m_ControllerInput;
-		//KeyboardKeys m_KeyboardInput;
 		std::shared_ptr<Command> m_Command;
-		DeviceType m_InputMode;
+		DeviceType m_DeviceType;
+		InputType m_InputType;
 	};
 }
 #endif

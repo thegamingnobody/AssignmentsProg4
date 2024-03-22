@@ -15,7 +15,7 @@ bool dae::InputManager::ProcessInput()
 		{
 			if (inputDevice->GetPlayerNumber() != action->GetPlayerNumber()) continue;
 
-			if (inputDevice->IsButtonPressed(action->GetButton()))
+			if (inputDevice->IsButtonPressed(action->GetButton(), action->GetInputType()))
 			{
 				action->Execute();
 			}
@@ -55,16 +55,16 @@ int dae::InputManager::AddController(const Action::DeviceType& DeviceType)
 	return newPlayerNumber;
 }
 
-std::shared_ptr<dae::Action> dae::InputManager::AddAction(const ControllerButtons& controllerButton, std::shared_ptr<Command> command, int const playerNumber)
+std::shared_ptr<dae::Action> dae::InputManager::AddAction(const ControllerButtons& controllerButton, const InputType& inputType, std::shared_ptr<Command> command, int const playerNumber)
 {
-	std::shared_ptr<Action> action = std::make_shared<Action>(controllerButton, command, playerNumber);
+	std::shared_ptr<Action> action = std::make_shared<Action>(controllerButton, inputType, command, playerNumber);
 	m_Actions.emplace_back(action);
 	return action;
 }
 
-std::shared_ptr<dae::Action> dae::InputManager::AddAction(const KeyboardKeys& keyboardKey, std::shared_ptr<Command> command, int const playerNumber)
+std::shared_ptr<dae::Action> dae::InputManager::AddAction(const KeyboardKeys& keyboardKey, const InputType& inputType, std::shared_ptr<Command> command, int const playerNumber)
 {
-	std::shared_ptr<Action> action = std::make_shared<Action>(keyboardKey, command, playerNumber);
+	std::shared_ptr<Action> action = std::make_shared<Action>(keyboardKey, inputType, command, playerNumber);
 	m_Actions.emplace_back(action);
 	return action;
 }
