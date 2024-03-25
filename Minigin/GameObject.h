@@ -14,9 +14,6 @@
 
 namespace dae
 {
-	template <class... Arguments>
-	class Observer;
-
 	class GameObject final
 	{
 	public:
@@ -78,13 +75,11 @@ namespace dae
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
-		template <class... Arguments>
-		void AddObserver(Observer<Arguments...>* observer)
+		void AddObserver(Observer* observer)
 		{
 			m_SubjectPlayerDied->AddObserver(observer);
 		}
-		template <class... Arguments>
-		void RemoveObserver(Observer<Arguments...>* observer)
+		void RemoveObserver(Observer* observer)
 		{
 			m_SubjectPlayerDied->RemoveObserver(observer);
 		}
@@ -95,9 +90,11 @@ namespace dae
 			switch (event.m_type)
 			{
 			case dae::EventType::PlayerDied:
-				std::cout << std::get<0>(event.m_args) << " " << std::get<1>(event.m_args) << "\n";
-				m_SubjectPlayerDied->NotifyObservers(event.m_args);
+			{
+				std::tuple<Arguments...> arguments{ std::any_cast<std::tuple<Arguments...>>(event.m_args) };
+				m_SubjectPlayerDied->NotifyObservers(arguments);
 				break;
+			}
 			default:
 				break;
 			}
@@ -111,8 +108,7 @@ namespace dae
 		std::vector<std::shared_ptr<Component>> m_pComponents{};
 		bool m_Render{ true };
 
-		//wanted to remove template brackets from Subject here, but haven't figured out how
-		Subject<const std::string&, int const>* m_SubjectPlayerDied;
+		std::unique_ptr<Subject> m_SubjectPlayerDied;
 	};
 }
 #endif

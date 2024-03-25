@@ -2,15 +2,16 @@
 #define DAE_OBSERVER
 
 #include <tuple>
+#include <any>
 
 namespace dae
 {
-	template <class... Arguments>
 	class Observer
 	{
 	public:
 		virtual ~Observer() {};
-		virtual void Notify(std::tuple<Arguments...> arguments) = 0;
+
+		virtual void Notify(std::any arguments) = 0;
  	};
 }
 

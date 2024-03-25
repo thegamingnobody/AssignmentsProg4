@@ -1,6 +1,9 @@
 #ifndef DAE_EVENT
 #define DAE_EVENT
 
+#include <any>
+#include <Tuple>
+
 namespace dae
 {
 	enum class EventType
@@ -19,11 +22,11 @@ namespace dae
 			m_numArgs = sizeof...(EventArguments);
 		}
 
-		static const uint8_t MAX_ARGS = 8;
+		//static const uint8_t MAX_ARGS = 8;
 
 		EventType m_type;
 		uint8_t m_numArgs;
-		std::tuple<EventArguments...> m_args;
+		std::any m_args;
 	};
 }
 

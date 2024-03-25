@@ -8,7 +8,7 @@ dae::GameObject::GameObject(bool const renderable) :
 	m_pOwnerObject(nullptr)
 {
 	m_Render = renderable;
-	m_SubjectPlayerDied = new Subject<const std::string&, int const>();
+	m_SubjectPlayerDied = std::make_unique<Subject>();
 }
 
 dae::GameObject::~GameObject() = default;

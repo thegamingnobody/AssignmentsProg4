@@ -2,21 +2,17 @@
 #define DAE_SUBJECT
 
 #include "Observer.h"
+#include <iostream>
 #include <vector>
-#include <tuple>
 
 namespace dae
 {
-	template <class... Arguments>
-	class Observer;
-
-	template <class... Arguments>
 	class Subject final
 	{
 	public:
 		Subject() = default;
 
-		void AddObserver(Observer<Arguments...>* observer)
+		void AddObserver(Observer* observer)
 		{
 			if (observer)
 			{
@@ -24,7 +20,7 @@ namespace dae
 			}
 		}
 
-		void RemoveObserver(Observer<Arguments...>* observer)
+		void RemoveObserver(Observer* observer)
 		{
 			auto removedObserverIt{ std::remove(m_Observers.begin(), m_Observers.end(), observer) };
 
@@ -34,8 +30,10 @@ namespace dae
 			}
 		}
 
-		void NotifyObservers(std::tuple<Arguments...>arguments)
+		void NotifyObservers(std::any arguments)
 		{
+			if (not IsTuple(arguments)) { return; }
+
 			for (auto& observer : m_Observers)
 			{
 				observer->Notify(arguments);
@@ -43,7 +41,24 @@ namespace dae
 		}
 
 	private:
-		std::vector< Observer<Arguments...>* > m_Observers{};
+		bool IsTuple(std::any arguments)
+		{
+			std::string argumentType{ arguments.type().name() };
+			std::string tupleName{ "class std::tuple" };
+
+			for (int i = 0; i < tupleName.length(); ++i)
+			{
+				if (argumentType[i] != tupleName[i])
+				{
+					std::cout << "Argument is not a tuple\n";
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		std::vector< Observer* > m_Observers{};
 	};
 }
 

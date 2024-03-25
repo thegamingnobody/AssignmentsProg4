@@ -5,11 +5,10 @@
 #include <string>
 #include <map>
 #include "Observer.h"
-#include <tuple>
 
 namespace dae 
 {
-	class CounterComponent : public Component, public Observer<const std::string&, int const>
+	class CounterComponent : public Component, public Observer
 	{
 	public:
 		void Update(float const elapsedTime) override;
@@ -24,7 +23,7 @@ namespace dae
 
 		CounterComponent(dae::GameObject* object);
 
-		void Notify(std::tuple<const std::string&, int const> eventArgs) override;
+		void Notify(std::any arguments) override;
 
 	private:
 		struct Counter

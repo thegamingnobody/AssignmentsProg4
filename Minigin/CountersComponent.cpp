@@ -28,6 +28,10 @@ void dae::CounterComponent::AddValue(const std::string& counterName, int const v
 			counter->second.m_CurrentValue = counter->second.m_MaxValue;
 		}
 	}
+	else
+	{
+		throw std::exception("Counter not found");
+	}
 }
 
 void dae::CounterComponent::DecreaseValue(const std::string& counterName, int const valueToDecrease)
@@ -67,7 +71,9 @@ dae::CounterComponent::CounterComponent(dae::GameObject* object)
 	object->AddObserver(this);
 }
 
-void dae::CounterComponent::Notify(std::tuple<const std::string&, int const> eventArgs)
+void dae::CounterComponent::Notify(std::any arguments)
 {
-	AddValue(std::get<0>(eventArgs), std::get<1>(eventArgs));
+	auto castedArguments{ std::any_cast<std::tuple<const std::string&, int const>>(arguments) };
+	AddValue(std::get<0>(castedArguments), std::get<1>(castedArguments));
+	std::cout << std::get<0>(castedArguments) << ": " << GetCurrentValue(std::get<0>(castedArguments)) << "\n";
 }
