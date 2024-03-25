@@ -16,10 +16,12 @@
 #include "Font.h"
 #include "FPSComponent.h"
 
+#ifdef ENABLE_STEAM
 #pragma warning (push)
 #pragma warning (disable: 4996)
 #include "steam/steam_api.h"
 #pragma warning (pop)
+#endif
 
 SDL_Window* g_window{};
 
@@ -109,8 +111,9 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		lastTime = currentTime;
 		lag += deltaTime;
 
+#ifdef ENABLE_STEAM
 		SteamAPI_RunCallbacks();
-
+#endif
 		doContinue = input.ProcessInput();
 		//float const fixedTimeStep{ 0.02f };
 		//while (lag >= fixedTimeStep)
