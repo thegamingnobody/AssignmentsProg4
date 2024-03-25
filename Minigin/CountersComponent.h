@@ -3,12 +3,13 @@
 
 #include "Component.h"
 #include <string>
-#include <optional>
 #include <map>
+#include "Observer.h"
+#include <tuple>
 
 namespace dae 
 {
-	class CounterComponent : public Component
+	class CounterComponent : public Component, public Observer<const std::string&, int const>
 	{
 	public:
 		void Update(float const elapsedTime) override;
@@ -22,6 +23,9 @@ namespace dae
 		int GetMaxValue(const std::string& counterName);
 
 		CounterComponent(dae::GameObject* object);
+
+		void Notify(std::tuple<const std::string&, int const> eventArgs) override;
+
 	private:
 		struct Counter
 		{

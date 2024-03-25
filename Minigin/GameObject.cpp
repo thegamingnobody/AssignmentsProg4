@@ -1,4 +1,3 @@
-#include <string>
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
@@ -9,9 +8,11 @@ dae::GameObject::GameObject(bool const renderable) :
 	m_pOwnerObject(nullptr)
 {
 	m_Render = renderable;
+	m_SubjectPlayerDied = new Subject<const std::string&, int const>();
 }
 
 dae::GameObject::~GameObject() = default;
+
 
 void dae::GameObject::Update(float const elapsedTime)
 {

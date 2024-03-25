@@ -17,7 +17,6 @@ namespace dae
 		dae::GameObject* m_Actor;
 		std::string m_TargetCounterName;
 		int m_AddedValue;
-		std::optional<CounterComponent*> m_CountersComponent;
 	};
 }
 

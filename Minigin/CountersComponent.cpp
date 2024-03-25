@@ -1,4 +1,5 @@
 #include "CountersComponent.h"
+#include "GameObject.h"
 
 void dae::CounterComponent::Update(float const)
 {
@@ -12,6 +13,7 @@ void dae::CounterComponent::AddCounter(const std::string& counterName, int const
 	temp.m_CapAtMax = capAtMaxValue;
 
 	m_Counters.insert({ counterName, temp });
+	
 }
 
 void dae::CounterComponent::AddValue(const std::string& counterName, int const valueToAdd)
@@ -62,4 +64,10 @@ dae::CounterComponent::CounterComponent(dae::GameObject* object)
 	: Component(object)
 	, m_Counters()
 {
+	object->AddObserver(this);
+}
+
+void dae::CounterComponent::Notify(std::tuple<const std::string&, int const> eventArgs)
+{
+	AddValue(std::get<0>(eventArgs), std::get<1>(eventArgs));
 }
