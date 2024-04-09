@@ -1,5 +1,6 @@
 #include "CountersComponent.h"
 #include "GameObject.h"
+#include "EventManager.h"
 
 void dae::CounterComponent::Update(float const)
 {
@@ -68,7 +69,7 @@ dae::CounterComponent::CounterComponent(dae::GameObject* object)
 	: Component(object)
 	, m_Counters()
 {
-	object->AddObserver(this);
+	dae::EventManager::GetInstance().AddObserver(this, dae::EventType::UpdateCounter);
 }
 
 void dae::CounterComponent::Notify(std::any arguments)

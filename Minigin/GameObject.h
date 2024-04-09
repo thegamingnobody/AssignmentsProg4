@@ -66,8 +66,6 @@ namespace dae
 			return std::nullopt;
 		}
 
-
-
 		GameObject(bool const renderable = true);
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
@@ -75,40 +73,12 @@ namespace dae
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
-		void AddObserver(Observer* observer)
-		{
-			m_SubjectPlayerDied->AddObserver(observer);
-		}
-		void RemoveObserver(Observer* observer)
-		{
-			m_SubjectPlayerDied->RemoveObserver(observer);
-		}
-
-		template <class... Arguments>
-		void Notify(Event<Arguments...> event)
-		{
-			switch (event.m_type)
-			{
-			case dae::EventType::PlayerDied:
-			{
-				std::tuple<Arguments...> arguments{ std::any_cast<std::tuple<Arguments...>>(event.m_args) };
-				m_SubjectPlayerDied->NotifyObservers(arguments);
-				break;
-			}
-			default:
-				break;
-			}
-		}
-
-
 	private:
 		GameObject* m_pOwnerObject{ nullptr };
 		std::vector<GameObject*> m_pChildObjects{};
 
 		std::vector<std::shared_ptr<Component>> m_pComponents{};
 		bool m_Render{ true };
-
-		std::unique_ptr<Subject> m_SubjectPlayerDied;
 	};
 }
 #endif

@@ -9,6 +9,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "EventManager.h"
 #include <chrono>
 #include <thread>
 #include "Scene.h"
@@ -78,6 +79,8 @@ dae::Minigin::Minigin(const std::string &dataPath)
 	Renderer::GetInstance().Init(g_window);
 
 	ResourceManager::GetInstance().Init(dataPath);
+
+	EventManager::GetInstance().Init();
 }
 
 dae::Minigin::~Minigin()
@@ -95,6 +98,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
+	auto& eventManager = EventManager::GetInstance();
 
 	int constexpr targetFPS{ 165 };
 
@@ -115,6 +119,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		SteamAPI_RunCallbacks();
 #endif
 		doContinue = input.ProcessInput();
+		eventManager.ProcessQueue();
 		//float const fixedTimeStep{ 0.02f };
 		//while (lag >= fixedTimeStep)
 		//{

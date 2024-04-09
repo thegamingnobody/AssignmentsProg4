@@ -49,12 +49,6 @@
     <Filter Include="steam">
       <UniqueIdentifier>{f44f599d-8788-4c55-b8a5-30279d902ff8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Observers">
-      <UniqueIdentifier>{76d55256-88de-47c2-8a92-d3baa2fbcb06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Observers">
-      <UniqueIdentifier>{4369e76b-c32f-405d-9c80-0705ebc400c9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -300,10 +294,13 @@
     <ClInclude Include="Event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Header Files\Observers</Filter>
-    </ClInclude>
     <ClInclude Include="Subject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -407,10 +404,13 @@
     <ClCompile Include="CountersComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Observer.cpp">
-      <Filter>Source Files\Observers</Filter>
-    </ClCompile>
     <ClCompile Include="Subject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

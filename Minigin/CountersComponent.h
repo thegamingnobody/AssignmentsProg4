@@ -13,7 +13,7 @@ namespace dae
 	public:
 		void Update(float const elapsedTime) override;
 
-		void AddCounter(const std::string& counterName, int const maxValue = 10, bool const capAtMaxValue = true);
+		void AddCounter(const std::string& counterName, int const maxValue = 0, bool const capAtMaxValue = false);
 
 		void AddValue(const std::string& counterName, int const valueToAdd);
 		void DecreaseValue(const std::string& counterName, int const valueToDecrease);
