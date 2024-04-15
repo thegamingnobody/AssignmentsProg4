@@ -1,11 +1,15 @@
 #ifndef TRANSFORM
 #define TRANSFORM
+
 #include <glm/glm.hpp>
 #include "Component.h"
+#include <any>
+#include "Observer.h"
+
 
 namespace dae
 {
-	class Transform : public Component
+	class Transform : public Component, public Observer
 	{
 	public:
 		void Update(float const elapsedTime) override;
@@ -23,6 +27,8 @@ namespace dae
 
 		Transform(dae::GameObject* object);
 		Transform(dae::GameObject* object, float const x, float const y, float const z = 0);
+
+		void Notify(std::any arguments) override;
 
 	private:
 		bool m_ShouldUpdate{ true };

@@ -4,10 +4,11 @@
 #include "TextComponent.h"
 #include "TextureComponent.h"
 
-dae::GameObject::GameObject(bool const renderable) : 
-	m_pOwnerObject(nullptr)
+dae::GameObject::GameObject(int const playerNumber, bool const renderable)
+	: m_PlayerNumber(playerNumber)
+	, m_pOwnerObject(nullptr)
+	, m_Render(renderable)
 {
-	m_Render = renderable;
 }
 
 dae::GameObject::~GameObject() = default;

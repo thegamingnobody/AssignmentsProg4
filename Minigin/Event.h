@@ -10,18 +10,17 @@ namespace dae
 	enum class EventType
 	{
 		UpdateCounter,
-		
+		MoveObject
 	};
 
 	struct Event
 	{
 		template<class... EventArguments>
-		Event(const EventType& eventType, std::tuple<EventArguments...> arguments)
+		Event(const EventType& eventType, std::tuple<EventArguments...> arguments, int const playerNumber)
 			: m_type(eventType)
-			, m_numArgs(0)
 			, m_args(arguments)
+			, m_playerNumber(playerNumber)
 		{
-			m_numArgs = sizeof...(EventArguments);
 		}
 
 		template<class... EventArguments>
@@ -37,11 +36,10 @@ namespace dae
 				throw e;
 			}
 		}
-		//static const uint8_t MAX_ARGS = 8;
 
 		EventType m_type;
-		uint8_t m_numArgs;
 		std::any m_args;
+		int const m_playerNumber;
 	};
 }
 

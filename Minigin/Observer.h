@@ -12,6 +12,9 @@ namespace dae
 		virtual ~Observer() {};
 
 		virtual void Notify(std::any arguments) = 0;
+		int GetTargetNumber() { return m_TargetNumber; }
+	protected:
+		int m_TargetNumber{-1};
  	};
 }
 

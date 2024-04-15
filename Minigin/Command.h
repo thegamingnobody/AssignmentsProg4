@@ -9,6 +9,8 @@ namespace dae
 	public:
 		virtual ~Command() = default;
 		virtual void Execute() = 0;
+	protected:
+		int m_PlayerNumber{ -1 };
 	};
 }
 

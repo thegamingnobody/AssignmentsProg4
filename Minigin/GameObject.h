@@ -66,18 +66,20 @@ namespace dae
 			return std::nullopt;
 		}
 
-		GameObject(bool const renderable = true);
+		GameObject(int const playerNumber = -1, bool const renderable = true);
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
+		int const m_PlayerNumber;
 	private:
 		GameObject* m_pOwnerObject{ nullptr };
 		std::vector<GameObject*> m_pChildObjects{};
 
 		std::vector<std::shared_ptr<Component>> m_pComponents{};
+
 		bool m_Render{ true };
 	};
 }

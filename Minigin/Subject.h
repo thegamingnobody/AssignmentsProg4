@@ -42,7 +42,11 @@ namespace dae
 			{
 				if (event.m_type == observer.first)
 				{
-					observer.second->Notify(event.m_args);
+					int const targetNumber{ observer.second->GetTargetNumber() };
+					if (event.m_playerNumber == targetNumber or event.m_playerNumber == -1)
+					{
+						observer.second->Notify(event.m_args);
+					}
 				}
 			}
 		}

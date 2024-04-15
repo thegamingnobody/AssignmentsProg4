@@ -69,6 +69,7 @@ dae::CounterComponent::CounterComponent(dae::GameObject* object)
 	: Component(object)
 	, m_Counters()
 {
+	m_TargetNumber = object->m_PlayerNumber;
 	dae::EventManager::GetInstance().AddObserver(this, dae::EventType::UpdateCounter);
 }
 

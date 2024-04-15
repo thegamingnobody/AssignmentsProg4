@@ -1,6 +1,7 @@
 #include "Transform.h"
 #include "Minigin.h"
 #include "GameObject.h"
+#include "EventManager.h"
 
 void dae::Transform::Update(float const)
 {
@@ -77,18 +78,6 @@ void dae::Transform::Move(float const addedX, float const addedY, float const ad
 	m_DirectionThisFrame.x += addedX;
 	m_DirectionThisFrame.y += addedY;
 	m_DirectionThisFrame.z += addedZ;
-
-	//if (m_Loop)
-	//{
-	//	m_LocalPosition.x = static_cast<float>(static_cast<int>(m_LocalPosition.x + addedX) % dae::Minigin::m_WindowWidth);
-	//	m_LocalPosition.y = static_cast<float>(static_cast<int>(m_LocalPosition.y + addedY) % dae::Minigin::m_WindowHeight);
-	//}
-	//else
-	//{
-	//	m_LocalPosition.x += addedX;
-	//	m_LocalPosition.y += addedY;
-	//}
-	//m_LocalPosition.z += addedZ;
 }
 
 dae::Transform::Transform(dae::GameObject* object) : Component(object)
@@ -96,9 +85,19 @@ dae::Transform::Transform(dae::GameObject* object) : Component(object)
 	, m_WorldPosition()
 	, m_DirectionThisFrame()
 {
+	m_TargetNumber = object->m_PlayerNumber;
+	dae::EventManager::GetInstance().AddObserver(this, dae::EventType::MoveObject);
 }
 
 dae::Transform::Transform(dae::GameObject* object, float const x, float const y, float const z) : Component(object)
 {
+	m_TargetNumber = object->m_PlayerNumber;
 	SetPosition(x, y, z);
+	dae::EventManager::GetInstance().AddObserver(this, dae::EventType::MoveObject);
+}
+
+void dae::Transform::Notify(std::any arguments)
+{
+	auto castedArguments{ std::get<0>(std::any_cast<std::tuple<const glm::vec3&>>(arguments)) };
+	Move(castedArguments.x, castedArguments.y, castedArguments.z);
 }
