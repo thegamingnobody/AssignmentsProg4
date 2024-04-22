@@ -6,17 +6,6 @@
 #endif
 #endif
 
-//#define ENABLE_STEAM
-
-#ifdef ENABLE_STEAM
-
-#pragma warning (push)
-#pragma warning (disable: 4996)
-#include <steam/steam_api.h>
-#pragma warning (pop)
-
-#endif // ENABLE_STEAM
-
 #include "Minigin.h"
 #include "SceneManager.h"
 #include "ResourceManager.h"
@@ -36,7 +25,7 @@
 void load()
 {
     auto& resourceManager = dae::ResourceManager::GetInstance();
-    //auto& inputManager = dae::InputManager::GetInstance();
+    auto& inputManager = dae::InputManager::GetInstance();
 
     auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 
@@ -70,63 +59,48 @@ void load()
     go->AddComponent<dae::Transform>().SetPosition(fpsOffset, static_cast<float>(dae::Minigin::m_WindowHeight - fpsOffset - fpsSize));
     scene.Add(go);
 
-    //int const playerControllerIndex = inputManager.AddController(dae::Action::DeviceType::Controller);
+    int const playerControllerIndex = inputManager.AddController(dae::Action::DeviceType::Controller);
 
-    ////peter pepper
-    //auto goPlayer = std::make_shared<dae::GameObject>(playerControllerIndex);
-    //goPlayer->AddComponent<dae::TextureComponent>("PeterPepper.png");
-    //goPlayer->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth / 2.0f, dae::Minigin::m_WindowHeight / 2.0f);
-    //auto& counterComp = goPlayer->AddComponent<dae::CounterComponent>();
-    //counterComp.AddCounter("Lives", 3, false);
-    //counterComp.AddCounter("Score", 0, false);
-    //scene.Add(goPlayer);
+    //peter pepper
+    auto goPlayer = std::make_shared<dae::GameObject>(playerControllerIndex);
+    goPlayer->AddComponent<dae::TextureComponent>("PeterPepper.png");
+    goPlayer->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth / 2.0f, dae::Minigin::m_WindowHeight / 2.0f);
+    auto& counterComp = goPlayer->AddComponent<dae::CounterComponent>();
+    counterComp.AddCounter("Lives", 3, false);
+    counterComp.AddCounter("Score", 0, false);
+    scene.Add(goPlayer);
 
-    //inputManager.AddAction(dae::ControllerButtons::DpadUp, dae::InputType::Held, std::make_shared<dae::MoveCommand>(playerControllerIndex, glm::vec3(0, -1, 0)), playerControllerIndex);
-    //inputManager.AddAction(dae::ControllerButtons::DpadDown, dae::InputType::Held, std::make_shared<dae::MoveCommand>(playerControllerIndex, glm::vec3(0, 1, 0)), playerControllerIndex);
-    //inputManager.AddAction(dae::ControllerButtons::DpadLeft, dae::InputType::Held, std::make_shared<dae::MoveCommand>(playerControllerIndex, glm::vec3(-1, 0, 0)), playerControllerIndex);
-    //inputManager.AddAction(dae::ControllerButtons::DpadRight, dae::InputType::Held, std::make_shared<dae::MoveCommand>(playerControllerIndex, glm::vec3(1, 0, 0)), playerControllerIndex);
-    //inputManager.AddAction(dae::ControllerButtons::FaceButtonLeft, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(playerControllerIndex, "Lives", -1), playerControllerIndex);
-    //inputManager.AddAction(dae::ControllerButtons::FaceButtonDown, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(playerControllerIndex, "Score", 10), playerControllerIndex);
-    //inputManager.AddAction(dae::ControllerButtons::FaceButtonRight, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(playerControllerIndex, "Score", 100), playerControllerIndex);
+    inputManager.AddAction(dae::ControllerButtons::DpadUp, dae::InputType::Held, std::make_shared<dae::MoveCommand>(playerControllerIndex, glm::vec3(0, -1, 0)), playerControllerIndex);
+    inputManager.AddAction(dae::ControllerButtons::DpadDown, dae::InputType::Held, std::make_shared<dae::MoveCommand>(playerControllerIndex, glm::vec3(0, 1, 0)), playerControllerIndex);
+    inputManager.AddAction(dae::ControllerButtons::DpadLeft, dae::InputType::Held, std::make_shared<dae::MoveCommand>(playerControllerIndex, glm::vec3(-1, 0, 0)), playerControllerIndex);
+    inputManager.AddAction(dae::ControllerButtons::DpadRight, dae::InputType::Held, std::make_shared<dae::MoveCommand>(playerControllerIndex, glm::vec3(1, 0, 0)), playerControllerIndex);
+    inputManager.AddAction(dae::ControllerButtons::FaceButtonLeft, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(playerControllerIndex, "Lives", -1), playerControllerIndex);
+    inputManager.AddAction(dae::ControllerButtons::FaceButtonDown, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(playerControllerIndex, "Score", 10), playerControllerIndex);
+    inputManager.AddAction(dae::ControllerButtons::FaceButtonRight, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(playerControllerIndex, "Score", 100), playerControllerIndex);
 
-    //int const player2ControllerIndex = inputManager.AddController(dae::Action::DeviceType::Keyboard);
+    int const player2ControllerIndex = inputManager.AddController(dae::Action::DeviceType::Keyboard);
 
-    ////mr egg
-    //auto goEnemy = std::make_shared<dae::GameObject>(player2ControllerIndex);
-    //goEnemy->AddComponent<dae::TextureComponent>("MrEgg.png");
-    //goEnemy->AddComponent<dae::Transform>();
-    //auto& counterComp2 = goEnemy->AddComponent<dae::CounterComponent>();
-    //counterComp2.AddCounter("Lives", 3, false);
-    //counterComp2.AddCounter("Score", 0, false);
-    //scene.Add(goEnemy);
+    //mr egg
+    auto goEnemy = std::make_shared<dae::GameObject>(player2ControllerIndex);
+    goEnemy->AddComponent<dae::TextureComponent>("MrEgg.png");
+    goEnemy->AddComponent<dae::Transform>();
+    auto& counterComp2 = goEnemy->AddComponent<dae::CounterComponent>();
+    counterComp2.AddCounter("Lives", 3, false);
+    counterComp2.AddCounter("Score", 0, false);
+    scene.Add(goEnemy);
 
-    //inputManager.AddAction(dae::KeyboardKeys::W, dae::InputType::Held, std::make_shared<dae::MoveCommand>(player2ControllerIndex, glm::vec3(0, -1, 0)), player2ControllerIndex);
-    //inputManager.AddAction(dae::KeyboardKeys::S, dae::InputType::Held, std::make_shared<dae::MoveCommand>(player2ControllerIndex, glm::vec3(0, 1, 0)), player2ControllerIndex);
-    //inputManager.AddAction(dae::KeyboardKeys::A, dae::InputType::Held, std::make_shared<dae::MoveCommand>(player2ControllerIndex, glm::vec3(-1, 0, 0)), player2ControllerIndex);
-    //inputManager.AddAction(dae::KeyboardKeys::D, dae::InputType::Held, std::make_shared<dae::MoveCommand>(player2ControllerIndex, glm::vec3(1, 0, 0)), player2ControllerIndex);
-    //inputManager.AddAction(dae::KeyboardKeys::C, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(player2ControllerIndex, "Lives", -1), player2ControllerIndex);
-    //inputManager.AddAction(dae::KeyboardKeys::Z, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(player2ControllerIndex, "Score", 10), player2ControllerIndex);
-    //inputManager.AddAction(dae::KeyboardKeys::X, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(player2ControllerIndex, "Score", 100), player2ControllerIndex);
+    inputManager.AddAction(dae::KeyboardKeys::W, dae::InputType::Held, std::make_shared<dae::MoveCommand>(player2ControllerIndex, glm::vec3(0, -1, 0)), player2ControllerIndex);
+    inputManager.AddAction(dae::KeyboardKeys::S, dae::InputType::Held, std::make_shared<dae::MoveCommand>(player2ControllerIndex, glm::vec3(0, 1, 0)), player2ControllerIndex);
+    inputManager.AddAction(dae::KeyboardKeys::A, dae::InputType::Held, std::make_shared<dae::MoveCommand>(player2ControllerIndex, glm::vec3(-1, 0, 0)), player2ControllerIndex);
+    inputManager.AddAction(dae::KeyboardKeys::D, dae::InputType::Held, std::make_shared<dae::MoveCommand>(player2ControllerIndex, glm::vec3(1, 0, 0)), player2ControllerIndex);
+    inputManager.AddAction(dae::KeyboardKeys::C, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(player2ControllerIndex, "Lives", -1), player2ControllerIndex);
+    inputManager.AddAction(dae::KeyboardKeys::Z, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(player2ControllerIndex, "Score", 10), player2ControllerIndex);
+    inputManager.AddAction(dae::KeyboardKeys::X, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(player2ControllerIndex, "Score", 100), player2ControllerIndex);
 }
 
 int main(int, char* []) 
 {
-#ifdef ENABLE_STEAM
-    if (!SteamAPI_Init())
-    {
-        std::cerr << "Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed)." << std::endl;
-        return 1;
-    }
-    else
-        std::cout << "Successfully initialized steam." << std::endl;
-#endif
-
     dae::Minigin engine("../Data/");
 	engine.Run(load);
-
-#ifdef ENABLE_STEAM
-    SteamAPI_Shutdown();
-#endif
-
 	return 0;
 }
