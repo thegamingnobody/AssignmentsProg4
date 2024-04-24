@@ -34,12 +34,6 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{71fe9d39-0ee6-43c3-a989-229e098ace84}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Commands">
-      <UniqueIdentifier>{fcce5f60-950f-41fd-838f-008d21fca600}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Commands">
-      <UniqueIdentifier>{b42defe0-f790-4830-b087-960eabe40a75}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Input">
       <UniqueIdentifier>{3cb91593-74d4-4235-9271-5f6ae5ae7b06}</UniqueIdentifier>
     </Filter>
@@ -58,9 +52,6 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
@@ -111,9 +102,6 @@
     <ClInclude Include="..\3rdParty\imgui-1.90.4\imstb_truetype.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="RotatorComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\3rdParty\imgui-1.90.4\backends\imgui_impl_opengl3.h">
       <Filter>imgui</Filter>
     </ClInclude>
@@ -122,12 +110,6 @@
     </ClInclude>
     <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui_plot.h">
       <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveCommand.h">
-      <Filter>Header Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="TrashTheCache.h">
       <Filter>Header Files\OtherClasses</Filter>
@@ -147,12 +129,6 @@
     <ClInclude Include="InputDevice.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="CountersCommand.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="CountersComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -162,8 +138,11 @@
     <ClInclude Include="Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="EventManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -224,9 +203,6 @@
     <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="RotatorComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.90.4\backends\imgui_impl_opengl3.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
@@ -235,12 +211,6 @@
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui_plot.cpp">
       <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
     </ClCompile>
     <ClCompile Include="TrashTheCache.cpp">
       <Filter>Source Files\OtherClasses</Filter>
@@ -257,12 +227,6 @@
     <ClCompile Include="InputDevice.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="CountersCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="CountersComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -270,7 +234,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

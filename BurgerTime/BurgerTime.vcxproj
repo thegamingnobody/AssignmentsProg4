@@ -151,7 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Minigin\Command.cpp" />
+    <ClCompile Include="..\Minigin\CountersCommand.cpp" />
+    <ClCompile Include="..\Minigin\CountersComponent.cpp" />
+    <ClCompile Include="..\Minigin\MoveCommand.cpp" />
+    <ClCompile Include="..\Minigin\RotatorComponent.cpp" />
     <ClCompile Include="BurgerTime.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Minigin\Command.h" />
+    <ClInclude Include="..\Minigin\CountersCommand.h" />
+    <ClInclude Include="..\Minigin\CountersComponent.h" />
+    <ClInclude Include="..\Minigin\MoveCommand.h" />
+    <ClInclude Include="..\Minigin\RotatorComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -102,5 +102,6 @@ int main(int, char* [])
 {
     dae::Minigin engine("../Data/");
 	engine.Run(load);
+
 	return 0;
 }
