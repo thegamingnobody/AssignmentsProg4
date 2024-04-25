@@ -20,10 +20,16 @@
 #include "Keyboard.h"
 #include "MoveCommand.h"
 #include "CountersCommand.h"
+#include "ServiceLocator.h"
+#include "soundSystem.h"
+#include <memory>
+#include "DAE_SDL_SoundSystem.h"
 
 
 void load()
 {
+    //dae::ServiceLocator::RegisterSoundSystem(std::make_unique<dae::DAE_SDL_SoundSystem>());
+
     auto& resourceManager = dae::ResourceManager::GetInstance();
     auto& inputManager = dae::InputManager::GetInstance();
 

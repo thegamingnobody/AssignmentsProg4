@@ -10,7 +10,8 @@ namespace dae
 	enum class EventType
 	{
 		UpdateCounter,
-		MoveObject
+		MoveObject,
+		PlaySound
 	};
 
 	struct Event

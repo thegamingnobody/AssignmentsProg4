@@ -36,9 +36,6 @@
     <ClCompile Include="..\Minigin\RotatorComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\Minigin\Command.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
     <ClCompile Include="..\Minigin\CountersCommand.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
@@ -52,9 +49,6 @@
     </ClInclude>
     <ClInclude Include="..\Minigin\RotatorComponent.h">
       <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Minigin\Command.h">
-      <Filter>Header Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="..\Minigin\CountersCommand.h">
       <Filter>Header Files\Commands</Filter>

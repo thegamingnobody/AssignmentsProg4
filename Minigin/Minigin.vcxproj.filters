@@ -40,6 +40,18 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{80b26b11-a69f-4149-9b85-468a1e0fbbde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Managers\ServiceLocator">
+      <UniqueIdentifier>{e0fe689a-4504-4f7e-bd58-f6acb7e3822b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\ServiceLocator">
+      <UniqueIdentifier>{952eba40-63ed-4615-9c9d-b6ed9c9d76fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers\ServiceLocator\Sound">
+      <UniqueIdentifier>{5677343e-ca91-4693-9219-c8592ff43fb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\ServiceLocator\Sound">
+      <UniqueIdentifier>{acc4fb3f-89f5-4cf5-9761-3422640ae480}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -129,20 +141,32 @@
     <ClInclude Include="InputDevice.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Subject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TextComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="EventManager.h">
       <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Header Files\Managers\ServiceLocator</Filter>
+    </ClInclude>
+    <ClInclude Include="soundSystem.h">
+      <Filter>Header Files\Managers\ServiceLocator\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Header Files\OtherClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files\OtherClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files\OtherClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="DAE_SDL_SoundSystem.h">
+      <Filter>Header Files\Managers\ServiceLocator\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,14 +251,26 @@
     <ClCompile Include="InputDevice.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Subject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Observer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EventManager.cpp">
       <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>Source Files\Managers\ServiceLocator</Filter>
+    </ClCompile>
+    <ClCompile Include="soundSystem.cpp">
+      <Filter>Source Files\Managers\ServiceLocator\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Source Files\OtherClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Source Files\OtherClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="DAE_SDL_SoundSystem.cpp">
+      <Filter>Source Files\Managers\ServiceLocator\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
