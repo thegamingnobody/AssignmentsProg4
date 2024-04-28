@@ -11,7 +11,9 @@ namespace dae
 	{
 		UpdateCounter,
 		MoveObject,
-		PlaySound
+		PlaySound,
+		StopSound,
+		StopAllSounds
 	};
 
 	struct Event
@@ -39,8 +41,9 @@ namespace dae
 		}
 
 		EventType m_type;
-		std::any m_args;
 		int const m_playerNumber;
+	private:
+		std::any m_args;
 	};
 }
 

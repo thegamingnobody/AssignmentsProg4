@@ -24,10 +24,8 @@ public:
 		Mix_FreeChunk(m_Chunk);
 	}
 
-	void PlaySound(const SoundId soundId, const float volume)
+	void PlaySound(const SoundId, const float volume)
 	{
-		soundId;
-
 		std::string filePath{ "../Data/Audio/Death.wav" };
 
 		m_Chunk = Mix_LoadWAV(filePath.c_str());
@@ -41,9 +39,8 @@ public:
 			std::cout << "Unable to play sound, Mix error: " << Mix_GetError() << "\n";
 		}
 	}
-	void StopSound(const SoundId soundId)
+	void StopSound(const SoundId)
 	{
-		soundId;
 	}
 	void StopAllSounds()
 	{
@@ -77,4 +74,26 @@ void dae::DAE_SDL_SoundSystem::StopSound(const SoundId soundId)
 void dae::DAE_SDL_SoundSystem::StopAllSounds()
 {
 	m_Impl->StopAllSounds();
+}
+
+void dae::DAE_SDL_SoundSystem::Notify(const Event& event)
+{
+	switch (event.m_type)
+	{
+	case EventType::PlaySound:
+	{
+		auto castedArguments{ event.GetArgumentsAsTuple<const unsigned short, const float>() };
+		PlaySound(std::get<0>(castedArguments), std::get<1>(castedArguments));
+		break;
+	}
+	case EventType::StopSound:
+	{
+		auto castedArguments{ event.GetArgumentsAsTuple<const unsigned short>() };
+		StopSound(std::get<0>(castedArguments));
+		break;
+	}
+	case EventType::StopAllSounds:
+		StopAllSounds();
+		break;
+	}
 }

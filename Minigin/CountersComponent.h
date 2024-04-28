@@ -23,7 +23,7 @@ namespace dae
 
 		CounterComponent(dae::GameObject* object);
 
-		void Notify(std::any arguments) override;
+		void Notify(const Event& event) override;
 
 	private:
 		struct Counter

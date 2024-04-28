@@ -28,7 +28,7 @@ namespace dae
 		Transform(dae::GameObject* object);
 		Transform(dae::GameObject* object, float const x, float const y, float const z = 0);
 
-		void Notify(std::any arguments) override;
+		void Notify(const Event& event) override;
 
 	private:
 		bool m_ShouldUpdate{ true };

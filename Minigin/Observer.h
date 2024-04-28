@@ -3,6 +3,7 @@
 
 #include <tuple>
 #include <any>
+#include "Event.h"
 
 namespace dae
 {
@@ -11,7 +12,7 @@ namespace dae
 	public:
 		virtual ~Observer() {};
 
-		virtual void Notify(std::any arguments) = 0;
+		virtual void Notify(const Event& event) = 0;
 		int GetTargetNumber() { return m_TargetNumber; }
 	protected:
 		int m_TargetNumber{-1};

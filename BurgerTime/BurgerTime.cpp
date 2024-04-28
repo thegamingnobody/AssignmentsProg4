@@ -51,6 +51,19 @@ void load()
     go->AddComponent<dae::Transform>().SetPosition(80, 20);
     scene.Add(go);
 
+    go = std::make_shared<dae::GameObject>();
+    font = resourceManager.LoadFont("Lingua.otf", 14);
+    go->AddComponent<dae::TextComponent>("Use WASD to move Mr. Egg, C to do damage, Z and X to increase score", font);
+    go->AddComponent<dae::TextureComponent>();
+    go->AddComponent<dae::Transform>().SetPosition(10, 70);
+    scene.Add(go);
+
+    go = std::make_shared<dae::GameObject>();
+    go->AddComponent<dae::TextComponent>("Use D-Pad to move Mr. Pepper, X to do damage, A and B to increase score", font);
+    go->AddComponent<dae::TextureComponent>();
+    go->AddComponent<dae::Transform>().SetPosition(10, 90);
+    scene.Add(go);
+
     //fps component
     go = std::make_shared<dae::GameObject>();
 

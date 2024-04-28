@@ -73,9 +73,9 @@ dae::CounterComponent::CounterComponent(dae::GameObject* object)
 	dae::EventManager::GetInstance().AddObserver(this, dae::EventType::UpdateCounter);
 }
 
-void dae::CounterComponent::Notify(std::any arguments)
+void dae::CounterComponent::Notify(const Event& event)
 {
-	auto castedArguments{ std::any_cast<std::tuple<const std::string&, int const>>(arguments) };
+	auto castedArguments{ event.GetArgumentsAsTuple<const std::string&, int const>()};
 	AddValue(std::get<0>(castedArguments), std::get<1>(castedArguments));
 	std::cout << std::get<0>(castedArguments) << ": " << GetCurrentValue(std::get<0>(castedArguments)) << "\n";
 }

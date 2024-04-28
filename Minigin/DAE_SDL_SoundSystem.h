@@ -3,10 +3,12 @@
 
 #include "soundSystem.h"
 #include <memory>
+#include "Observer.h"
+
 
 namespace dae
 {
-	class DAE_SDL_SoundSystem final : public SoundSystem
+	class DAE_SDL_SoundSystem final : public SoundSystem, public Observer
 	{
 	public:
 		DAE_SDL_SoundSystem();
@@ -20,6 +22,8 @@ namespace dae
 		void PlaySound(const SoundId soundId, const float volume) override;
 		void StopSound(const SoundId soundId) override;
 		void StopAllSounds() override;
+
+		void Notify(const Event& event) override;
 
 	private:
 		class SDLSoundImpl;

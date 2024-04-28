@@ -36,8 +36,6 @@ namespace dae
 
 		void NotifyObservers(const Event& event)
 		{
-			if (not IsTuple(event.m_args)) { return; }
-
 			for (auto& observer : m_Observers)
 			{
 				if (event.m_type == observer.first)
@@ -45,30 +43,13 @@ namespace dae
 					int const targetNumber{ observer.second->GetTargetNumber() };
 					if (event.m_playerNumber == targetNumber or event.m_playerNumber == -1)
 					{
-						observer.second->Notify(event.m_args);
+						observer.second->Notify(event);
 					}
 				}
 			}
 		}
 
 	private:
-		bool IsTuple(std::any arguments)
-		{
-			std::string argumentType{ arguments.type().name() };
-			std::string tupleName{ "class std::tuple" };
-
-			for (int i = 0; i < tupleName.length(); ++i)
-			{
-				if (argumentType[i] != tupleName[i])
-				{
-					std::cout << "Argument is not a tuple\n";
-					return false;
-				}
-			}
-
-			return true;
-		}
-
 		std::vector< std::pair<EventType, Observer*> > m_Observers{};
 	};
 }

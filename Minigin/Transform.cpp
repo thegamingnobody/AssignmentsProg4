@@ -96,8 +96,8 @@ dae::Transform::Transform(dae::GameObject* object, float const x, float const y,
 	dae::EventManager::GetInstance().AddObserver(this, dae::EventType::MoveObject);
 }
 
-void dae::Transform::Notify(std::any arguments)
+void dae::Transform::Notify(const Event& event)
 {
-	auto castedArguments{ std::get<0>(std::any_cast<std::tuple<const glm::vec3&>>(arguments)) };
+	auto castedArguments{ std::get<0>(event.GetArgumentsAsTuple<const glm::vec3&>()) };
 	Move(castedArguments.x, castedArguments.y, castedArguments.z);
 }
