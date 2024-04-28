@@ -20,15 +20,15 @@
 #include "Keyboard.h"
 #include "MoveCommand.h"
 #include "CountersCommand.h"
-#include "ServiceLocator.h"
-#include "soundSystem.h"
+#include <ServiceLocator.h>
+#include <soundSystem.h>
 #include <memory>
-#include "DAE_SDL_SoundSystem.h"
+#include <DAE_SDL_SoundSystem.h>
 
 
 void load()
 {
-    //dae::ServiceLocator::RegisterSoundSystem(std::make_unique<dae::DAE_SDL_SoundSystem>());
+    dae::ServiceLocator::RegisterSoundSystem(std::make_unique<dae::DAE_SDL_SoundSystem>());
 
     auto& resourceManager = dae::ResourceManager::GetInstance();
     auto& inputManager = dae::InputManager::GetInstance();
@@ -69,8 +69,8 @@ void load()
 
     //peter pepper
     auto goPlayer = std::make_shared<dae::GameObject>(playerControllerIndex);
-    goPlayer->AddComponent<dae::TextureComponent>("PeterPepper.png");
-    goPlayer->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth / 2.0f, dae::Minigin::m_WindowHeight / 2.0f);
+    goPlayer->AddComponent<dae::TextureComponent>("Sprites/PeterPepper.png");
+    goPlayer->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth * 0.60f, dae::Minigin::m_WindowHeight * 0.50f);
     auto& counterComp = goPlayer->AddComponent<dae::CounterComponent>();
     counterComp.AddCounter("Lives", 3, false);
     counterComp.AddCounter("Score", 0, false);
@@ -88,8 +88,8 @@ void load()
 
     //mr egg
     auto goEnemy = std::make_shared<dae::GameObject>(player2ControllerIndex);
-    goEnemy->AddComponent<dae::TextureComponent>("MrEgg.png");
-    goEnemy->AddComponent<dae::Transform>();
+    goEnemy->AddComponent<dae::TextureComponent>("Sprites/MrEgg.png");
+    goEnemy->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth * 0.40f, dae::Minigin::m_WindowHeight * 0.50f);
     auto& counterComp2 = goEnemy->AddComponent<dae::CounterComponent>();
     counterComp2.AddCounter("Lives", 3, false);
     counterComp2.AddCounter("Score", 0, false);

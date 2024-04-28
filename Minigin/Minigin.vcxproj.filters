@@ -168,6 +168,9 @@
     <ClInclude Include="Command.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NullSoundSystem.h">
+      <Filter>Header Files\Managers\ServiceLocator\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -271,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="Command.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NullSoundSystem.cpp">
+      <Filter>Source Files\Managers\ServiceLocator\Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

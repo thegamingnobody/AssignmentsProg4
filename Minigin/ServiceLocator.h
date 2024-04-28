@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "soundSystem.h"
+#include "NullSoundSystem.h"
 
 namespace dae
 {
@@ -15,6 +16,10 @@ namespace dae
 			if (soundSystem != nullptr)
 			{
 				m_SoundSystemInstance = std::move(soundSystem); 
+			}
+			else
+			{
+				m_SoundSystemInstance = std::make_unique<NullSoundSystem>();
 			}
 		}
 	private:

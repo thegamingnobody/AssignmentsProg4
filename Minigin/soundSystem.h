@@ -1,24 +1,24 @@
 #ifndef DAE_SOUNDSYSTEM
 #define DAE_SOUNDSYSTEM
 
-#include "Singleton.h"
-
 namespace dae
 {
-	enum class SoundIds
-	{
-		test
-	};
+	using SoundId = unsigned short;
 
-	class SoundSystem : public Singleton<SoundSystem>
+	class SoundSystem
 	{
 	public:
-		virtual void play(const SoundIds soundId, const float volume) = 0;
-		
-	private:
-		friend class Singleton<SoundSystem>;
 		SoundSystem() = default;
+		virtual ~SoundSystem() = default;
 
+		SoundSystem(const SoundSystem& other) = delete;
+		SoundSystem(SoundSystem&& other) = delete;
+		SoundSystem& operator=(const SoundSystem& other) = delete;
+		SoundSystem& operator=(SoundSystem&& other) = delete;
+
+		virtual void PlaySound(const SoundId soundId, const float volume) = 0;
+		virtual void StopSound(const SoundId soundId) = 0;
+		virtual void StopAllSounds() = 0;
 	};
 	
 }

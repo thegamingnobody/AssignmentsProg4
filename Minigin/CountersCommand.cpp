@@ -2,6 +2,7 @@
 #include "Event.h"
 #include <string>
 #include "EventManager.h"
+#include <ServiceLocator.h>
 
 dae::CountersCommand::CountersCommand(int const playerNumber, const std::string& targetCounterName, int const addedValue)
 	: m_TargetCounterName(targetCounterName)
