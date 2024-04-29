@@ -4,6 +4,7 @@
 #include "soundSystem.h"
 #include <memory>
 #include "Observer.h"
+#include <thread>
 
 
 namespace dae
@@ -28,6 +29,19 @@ namespace dae
 	private:
 		class SDLSoundImpl;
 		std::unique_ptr<SDLSoundImpl> m_Impl;
+
+		struct SoundInfo
+		{
+			SoundInfo(const SoundId& soundId, float const volume)
+				: m_SoundId(soundId)
+				, m_Volume(volume)
+			{
+
+			}
+
+			SoundId m_SoundId{};
+			float m_Volume{};
+		};
 	};
 }
 

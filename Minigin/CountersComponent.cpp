@@ -1,17 +1,19 @@
 #include "CountersComponent.h"
 #include "GameObject.h"
 #include "EventManager.h"
+#include <ServiceLocator.h>
 
 void dae::CounterComponent::Update(float const)
 {
 }
 
-void dae::CounterComponent::AddCounter(const std::string& counterName, int const maxValue, bool const capAtMaxValue)
+void dae::CounterComponent::AddCounter(const std::string& counterName, const CounterTypes& counterType, int const maxValue, bool const capAtMaxValue)
 {
 	Counter temp{};
 	temp.m_CurrentValue = maxValue;
 	temp.m_MaxValue = maxValue;
 	temp.m_CapAtMax = capAtMaxValue;
+	temp.m_Type = counterType;
 
 	m_Counters.insert({ counterName, temp });
 	
@@ -24,6 +26,11 @@ void dae::CounterComponent::AddValue(const std::string& counterName, int const v
 	if (counter != m_Counters.end())
 	{
 		counter->second.m_CurrentValue += valueToAdd;
+		if (counter->second.m_Type == CounterTypes::Lives)
+		{
+			dae::ServiceLocator::GetSoundSystem().PlaySound(1, 0.1f);
+		}
+
 		if (counter->second.m_CapAtMax and counter->second.m_CurrentValue > counter->second.m_MaxValue)
 		{
 			counter->second.m_CurrentValue = counter->second.m_MaxValue;

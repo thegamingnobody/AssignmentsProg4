@@ -3,12 +3,17 @@
 #include "DAE_SDL_SoundSystem.h"
 
 #include <iostream>
+#include <queue>
+#include <mutex>
 
 class dae::DAE_SDL_SoundSystem::SDLSoundImpl
 {
 public:
 	SDLSoundImpl() 
-		: m_Chunk()
+		: m_SoundThread()
+		, m_SoundQueue()
+		, m_Mutex()
+		, m_ConditionalVar()
 	{
 		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == 0)
 		{
@@ -18,26 +23,23 @@ public:
 		{
 			std::cout << "Unable to open Audio Device, Mix error: " << Mix_GetError() << "\n";
 		}
+
+		m_SoundThread = std::jthread(&SDLSoundImpl::ProcessQueue, this);
 	}
 	~SDLSoundImpl()
 	{
-		Mix_FreeChunk(m_Chunk);
+		//Mix_FreeChunk(m_Chunk);
 	}
 
-	void PlaySound(const SoundId, const float volume)
+	void PlaySound(const SoundId soundId, const float volume)
 	{
-		std::string filePath{ "../Data/Audio/Death.wav" };
+		SoundInfo soundInfo{ soundId, volume };
 
-		m_Chunk = Mix_LoadWAV(filePath.c_str());
-		if (m_Chunk)
 		{
-			Mix_VolumeChunk(m_Chunk, static_cast<int>(volume * MIX_MAX_VOLUME));
-			Mix_PlayChannel(-1, m_Chunk, 0);
+			std::lock_guard<std::mutex> lock(m_Mutex);
+			m_SoundQueue.push(soundInfo);
 		}
-		else
-		{
-			std::cout << "Unable to play sound, Mix error: " << Mix_GetError() << "\n";
-		}
+		m_ConditionalVar.notify_one();
 	}
 	void StopSound(const SoundId)
 	{
@@ -47,8 +49,41 @@ public:
 
 	}
 
+	void ProcessQueue()
+	{
+		while (true)
+		{
+			std::unique_lock<std::mutex> lock{ m_Mutex };
+			m_ConditionalVar.wait(lock, [&] { return (m_SoundQueue.size() > 0); });
+			ProcessSound(m_SoundQueue.front());
+			m_SoundQueue.pop();
+		}
+
+	}
+
 private:
-	Mix_Chunk* m_Chunk;
+	void ProcessSound(SoundInfo soundInfo)
+	{
+		//todo: file path generator based on sound id (user geeft map mee met de id en een std string file naam?
+		std::string filePath{ "../Data/Audio/Death.wav" };
+
+		Mix_Chunk* m_Chunk = Mix_LoadWAV(filePath.c_str());
+
+		if (m_Chunk)
+		{
+			Mix_VolumeChunk(m_Chunk, static_cast<int>(soundInfo.m_Volume * MIX_MAX_VOLUME));
+			Mix_PlayChannel(-1, m_Chunk, 0);
+		}
+		else
+		{
+			std::cout << "Unable to play sound, Mix error: " << Mix_GetError() << "\n";
+		}
+	}
+
+	std::jthread m_SoundThread;
+	std::queue<SoundInfo> m_SoundQueue;
+	std::mutex m_Mutex;
+	std::condition_variable m_ConditionalVar;
 };
 
 

@@ -85,8 +85,8 @@ void load()
     goPlayer->AddComponent<dae::TextureComponent>("Sprites/PeterPepper.png");
     goPlayer->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth * 0.60f, dae::Minigin::m_WindowHeight * 0.50f);
     auto& counterComp = goPlayer->AddComponent<dae::CounterComponent>();
-    counterComp.AddCounter("Lives", 3, false);
-    counterComp.AddCounter("Score", 0, false);
+    counterComp.AddCounter("Lives", dae::CounterTypes::Lives, 3, false);
+    counterComp.AddCounter("Score", dae::CounterTypes::Score, 0, false);
     scene.Add(goPlayer);
 
     inputManager.AddAction(dae::ControllerButtons::DpadUp, dae::InputType::Held, std::make_shared<dae::MoveCommand>(playerControllerIndex, glm::vec3(0, -1, 0)), playerControllerIndex);
@@ -104,8 +104,8 @@ void load()
     goEnemy->AddComponent<dae::TextureComponent>("Sprites/MrEgg.png");
     goEnemy->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth * 0.40f, dae::Minigin::m_WindowHeight * 0.50f);
     auto& counterComp2 = goEnemy->AddComponent<dae::CounterComponent>();
-    counterComp2.AddCounter("Lives", 3, false);
-    counterComp2.AddCounter("Score", 0, false);
+    counterComp2.AddCounter("Lives", dae::CounterTypes::Lives, 3, false);
+    counterComp2.AddCounter("Score", dae::CounterTypes::Score, 0, false);
     scene.Add(goEnemy);
 
     inputManager.AddAction(dae::KeyboardKeys::W, dae::InputType::Held, std::make_shared<dae::MoveCommand>(player2ControllerIndex, glm::vec3(0, -1, 0)), player2ControllerIndex);
