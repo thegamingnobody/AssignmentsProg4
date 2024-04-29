@@ -67,9 +67,6 @@ public:
 				ProcessSound(soundRequest);
 			}
 		}
-
-		std::cout << "Thread quit\n";
-
 	}
 
 	void QuitThread()

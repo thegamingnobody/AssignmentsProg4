@@ -66,11 +66,6 @@ void dae::Transform::SetPosition(float const x, float const y, float const z)
 	m_ShouldUpdate = true;
 }
 
-void dae::Transform::SetLoopable(bool const loop)
-{
-	m_Loop = loop;
-}
-
 void dae::Transform::Move(float const addedX, float const addedY, float const addedZ)
 {
 	m_ShouldUpdate = true;

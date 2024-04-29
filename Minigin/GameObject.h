@@ -66,6 +66,14 @@ namespace dae
 			return std::nullopt;
 		}
 
+		template <class ComponentType>
+		requires std::derived_from<ComponentType, Component>
+		bool HasComponent() const
+		{
+			std::optional<ComponentType*> component{ GetComponent<ComponentType>() };
+			return component.has_value();
+		}
+
 		GameObject(int const playerNumber = -1, bool const renderable = true);
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
