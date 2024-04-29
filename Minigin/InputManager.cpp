@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include "InputManager.h"
 #include <backends/imgui_impl_sdl2.h>
+#include "ServiceLocator.h"
 
 bool dae::InputManager::ProcessInput()
 {

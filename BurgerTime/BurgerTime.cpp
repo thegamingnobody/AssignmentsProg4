@@ -2,7 +2,7 @@
 
 #if _DEBUG
 #if __has_include(<vld.h>)
-//#include <vld.h>
+#include <vld.h>
 #endif
 #endif
 

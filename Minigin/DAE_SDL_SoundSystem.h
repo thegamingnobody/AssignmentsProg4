@@ -26,6 +26,8 @@ namespace dae
 
 		void Notify(const Event& event) override;
 
+		void QuitThread();
+
 	private:
 		class SDLSoundImpl;
 		std::unique_ptr<SDLSoundImpl> m_Impl;
