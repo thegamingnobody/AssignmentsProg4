@@ -13,7 +13,6 @@ public:
 		: m_SoundThread()
 		, m_SoundQueue()
 		, m_Mutex()
-		, m_ConditionalVar()
 		, m_RunThread(true)
 	{
 		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == 0)
@@ -37,11 +36,8 @@ public:
 	{
 		SoundInfo soundInfo{ soundId, volume };
 
-		{
-			std::lock_guard<std::mutex> lock(m_Mutex);
-			m_SoundQueue.push(soundInfo);
-		}
-		m_ConditionalVar.notify_one();
+		std::scoped_lock<std::mutex> lock(m_Mutex);
+		m_SoundQueue.push(soundInfo);
 	}
 	void StopSound(const SoundId)
 	{
@@ -55,27 +51,21 @@ public:
 	{
 		while (m_RunThread)
 		{
-			std::unique_lock<std::mutex> lock{ m_Mutex };
-			m_ConditionalVar.wait(lock, [&] { return ((m_SoundQueue.size() > 0) or not m_RunThread); });
-			if (m_RunThread)
-			{
-				auto soundRequest{ m_SoundQueue.front() };
-				m_SoundQueue.pop();
+			if (not (m_SoundQueue.size() > 0)) continue;
 
-				lock.unlock();
+			if (not m_RunThread) continue;
 
-				ProcessSound(soundRequest);
-			}
+			auto& soundRequest{ m_SoundQueue.front() };
+			m_SoundQueue.pop();
+
+			ProcessSound(soundRequest);
 		}
 	}
 
 	void QuitThread()
 	{
-		{
-			std::lock_guard<std::mutex> lock(m_Mutex);
-			m_RunThread = false;
-		}
-		m_ConditionalVar.notify_one();
+		std::scoped_lock<std::mutex> lock(m_Mutex);
+		m_RunThread = false;
 	}
 
 private:
@@ -102,7 +92,6 @@ private:
 	std::jthread m_SoundThread;
 	std::queue<SoundInfo> m_SoundQueue;
 	std::mutex m_Mutex;
-	std::condition_variable m_ConditionalVar;
 	bool m_RunThread;
 };
 

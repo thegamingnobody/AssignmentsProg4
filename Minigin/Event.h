@@ -13,7 +13,8 @@ namespace dae
 		MoveObject,
 		PlaySound,
 		StopSound,
-		StopAllSounds
+		StopAllSounds,
+		TransformChanged
 	};
 
 	struct Event

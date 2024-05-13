@@ -35,6 +35,8 @@ namespace dae
 		glm::vec3 m_WorldPosition;
 
 		glm::vec3 m_DirectionThisFrame;
+
+		glm::vec3 m_ParentWorldPos;
 	};
 }
 

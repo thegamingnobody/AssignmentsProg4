@@ -74,7 +74,9 @@ namespace dae
 			return component.has_value();
 		}
 
-		GameObject(int const playerNumber = -1, bool const renderable = true);
+		bool HasChildren() const;
+
+		GameObject(const std::string& ObjectName = "", int const playerNumber = -1, bool const renderable = true);
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
@@ -83,6 +85,8 @@ namespace dae
 
 		int const m_PlayerNumber;
 	private:
+		std::string const m_ObjectName;
+
 		GameObject* m_pOwnerObject{ nullptr };
 		std::vector<GameObject*> m_pChildObjects{};
 

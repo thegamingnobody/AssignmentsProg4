@@ -184,12 +184,14 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="..\Minigin\MoveCommand.cpp" />
     <ClCompile Include="..\Minigin\RotatorComponent.cpp" />
     <ClCompile Include="BurgerTime.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Minigin\CountersCommand.h" />
     <ClInclude Include="..\Minigin\CountersComponent.h" />
     <ClInclude Include="..\Minigin\MoveCommand.h" />
     <ClInclude Include="..\Minigin\RotatorComponent.h" />
+    <ClInclude Include="PlayerState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,11 +1,14 @@
 #include "GameObject.h"
+#include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "TextComponent.h"
 #include "TextureComponent.h"
 
-dae::GameObject::GameObject(int const playerNumber, bool const renderable)
-	: m_PlayerNumber(playerNumber)
+
+dae::GameObject::GameObject(const std::string& ObjectName,int const playerNumber, bool const renderable)
+	: m_ObjectName(ObjectName)
+	, m_PlayerNumber(playerNumber)
 	, m_pOwnerObject(nullptr)
 	, m_Render(renderable)
 {
@@ -13,6 +16,10 @@ dae::GameObject::GameObject(int const playerNumber, bool const renderable)
 
 dae::GameObject::~GameObject() = default;
 
+bool dae::GameObject::HasChildren() const
+{
+	return (m_pChildObjects.size() > 0);
+}
 
 void dae::GameObject::Update(float const elapsedTime)
 {

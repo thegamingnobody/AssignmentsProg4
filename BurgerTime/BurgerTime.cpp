@@ -2,7 +2,7 @@
 
 #if _DEBUG
 #if __has_include(<vld.h>)
-#include <vld.h>
+//#include <vld.h>
 #endif
 #endif
 
@@ -35,37 +35,37 @@ void load()
 
     auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 
-    auto go = std::make_shared<dae::GameObject>();
+    auto go = std::make_shared<dae::GameObject>("Background");
     go->AddComponent<dae::TextureComponent>("background.tga");
     scene.Add(go);
 
-    go = std::make_shared<dae::GameObject>();
+    go = std::make_shared<dae::GameObject>("DAE Logo");
     go->AddComponent<dae::TextureComponent>("logo.tga");
     go->AddComponent<dae::Transform>().SetPosition(216, 180);
     scene.Add(go);
 
-    go = std::make_shared<dae::GameObject>();
+    go = std::make_shared<dae::GameObject>("P4A text");
     auto font = resourceManager.LoadFont("Lingua.otf", 36);
     go->AddComponent<dae::TextComponent>("Programming 4 Assignment", font);
     go->AddComponent<dae::TextureComponent>();
     go->AddComponent<dae::Transform>().SetPosition(80, 20);
     scene.Add(go);
 
-    go = std::make_shared<dae::GameObject>();
+    go = std::make_shared<dae::GameObject>("keyboard ctrls text");
     font = resourceManager.LoadFont("Lingua.otf", 14);
     go->AddComponent<dae::TextComponent>("Use WASD to move Mr. Egg, C to do damage, Z and X to increase score", font);
     go->AddComponent<dae::TextureComponent>();
     go->AddComponent<dae::Transform>().SetPosition(10, 70);
     scene.Add(go);
 
-    go = std::make_shared<dae::GameObject>();
+    go = std::make_shared<dae::GameObject>("gamepad ctrls text");
     go->AddComponent<dae::TextComponent>("Use D-Pad to move Mr. Pepper, X to do damage, A and B to increase score", font);
     go->AddComponent<dae::TextureComponent>();
     go->AddComponent<dae::Transform>().SetPosition(10, 90);
     scene.Add(go);
 
     //fps component
-    go = std::make_shared<dae::GameObject>();
+    go = std::make_shared<dae::GameObject>("fps comp obj");
 
     int const fpsSize{ 27 };
     float const fpsOffset{ 5 };
@@ -80,10 +80,16 @@ void load()
 
     int const playerControllerIndex = inputManager.AddController(dae::Action::DeviceType::Controller);
 
+    int const player2ControllerIndex = inputManager.AddController(dae::Action::DeviceType::Keyboard);
+
     //peter pepper
-    auto goPlayer = std::make_shared<dae::GameObject>(playerControllerIndex);
+    auto goPlayer = std::make_shared<dae::GameObject>("Player", playerControllerIndex);
     goPlayer->AddComponent<dae::TextureComponent>("Sprites/PeterPepper.png");
+
     goPlayer->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth * 0.60f, dae::Minigin::m_WindowHeight * 0.50f);
+    //goPlayer->AddComponent<dae::Transform>();
+    //goPlayer->SetParent(goEnemy.get());
+
     auto& counterComp = goPlayer->AddComponent<dae::CounterComponent>();
     counterComp.AddCounter("Lives", dae::CounterTypes::Lives, 3, false);
     counterComp.AddCounter("Score", dae::CounterTypes::Score, 0, false);
@@ -97,11 +103,11 @@ void load()
     inputManager.AddAction(dae::ControllerButtons::FaceButtonDown, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(playerControllerIndex, "Score", 10), playerControllerIndex);
     inputManager.AddAction(dae::ControllerButtons::FaceButtonRight, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(playerControllerIndex, "Score", 100), playerControllerIndex);
 
-    int const player2ControllerIndex = inputManager.AddController(dae::Action::DeviceType::Keyboard);
-
     //mr egg
-    auto goEnemy = std::make_shared<dae::GameObject>(player2ControllerIndex);
+    auto goEnemy = std::make_shared<dae::GameObject>("enemy", player2ControllerIndex);
     goEnemy->AddComponent<dae::TextureComponent>("Sprites/MrEgg.png");
+
+    //todo: rethink world location / local pos
     goEnemy->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth * 0.40f, dae::Minigin::m_WindowHeight * 0.50f);
     auto& counterComp2 = goEnemy->AddComponent<dae::CounterComponent>();
     counterComp2.AddCounter("Lives", dae::CounterTypes::Lives, 3, false);
@@ -115,6 +121,9 @@ void load()
     inputManager.AddAction(dae::KeyboardKeys::C, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(player2ControllerIndex, "Lives", -1), player2ControllerIndex);
     inputManager.AddAction(dae::KeyboardKeys::Z, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(player2ControllerIndex, "Score", 10), player2ControllerIndex);
     inputManager.AddAction(dae::KeyboardKeys::X, dae::InputType::PressedThisFrame, std::make_shared<dae::CountersCommand>(player2ControllerIndex, "Score", 100), player2ControllerIndex);
+
+
+
 }
 
 int main(int, char* []) 

@@ -42,6 +42,9 @@
     <ClCompile Include="..\Minigin\MoveCommand.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Minigin\CountersComponent.h">
@@ -55,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="..\Minigin\MoveCommand.h">
       <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
