@@ -45,6 +45,9 @@
     <ClCompile Include="PlayerState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StateManagerComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Minigin\CountersComponent.h">
@@ -61,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="PlayerState.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManagerComponent.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

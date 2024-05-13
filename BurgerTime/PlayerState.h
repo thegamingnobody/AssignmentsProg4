@@ -11,6 +11,7 @@ namespace dae
 		PlayerState(std::shared_ptr<GameObject> object);
 
 		virtual void OnEnter() {}
+		virtual void Update(float) {}
 		virtual void OnExit() {}
 
 	private:
