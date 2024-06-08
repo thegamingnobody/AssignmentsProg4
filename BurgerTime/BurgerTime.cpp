@@ -24,6 +24,7 @@
 #include <soundSystem.h>
 #include <memory>
 #include <DAE_SDL_SoundSystem.h>
+#include <BoundingBoxComponent.h>
 
 
 void load()
@@ -35,23 +36,23 @@ void load()
 
     auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 
-    auto go = std::make_shared<dae::GameObject>("Background");
-    go->AddComponent<dae::TextureComponent>("background.tga");
-    scene.Add(go);
+    //auto go = std::make_shared<dae::GameObject>("Background");
+    //go->AddComponent<dae::TextureComponent>("background.tga");
+    //scene.Add(go);
 
-    go = std::make_shared<dae::GameObject>("DAE Logo");
-    go->AddComponent<dae::TextureComponent>("logo.tga");
-    go->AddComponent<dae::Transform>().SetPosition(216, 180);
-    scene.Add(go);
+    //go = std::make_shared<dae::GameObject>("DAE Logo");
+    //go->AddComponent<dae::TextureComponent>("logo.tga");
+    //go->AddComponent<dae::Transform>().SetPosition(216, 180);
+    //scene.Add(go);
 
-    go = std::make_shared<dae::GameObject>("P4A text");
     auto font = resourceManager.LoadFont("Lingua.otf", 36);
-    go->AddComponent<dae::TextComponent>("Programming 4 Assignment", font);
-    go->AddComponent<dae::TextureComponent>();
-    go->AddComponent<dae::Transform>().SetPosition(80, 20);
-    scene.Add(go);
+    //go = std::make_shared<dae::GameObject>("P4A text");
+    //go->AddComponent<dae::TextComponent>("Programming 4 Assignment", font);
+    //go->AddComponent<dae::TextureComponent>();
+    //go->AddComponent<dae::Transform>().SetPosition(80, 20);
+    //scene.Add(go);
 
-    go = std::make_shared<dae::GameObject>("keyboard ctrls text");
+    auto go = std::make_shared<dae::GameObject>("keyboard ctrls text");
     font = resourceManager.LoadFont("Lingua.otf", 14);
     go->AddComponent<dae::TextComponent>("Use WASD to move Mr. Egg, C to do damage, Z and X to increase score", font);
     go->AddComponent<dae::TextureComponent>();
@@ -84,9 +85,10 @@ void load()
 
     //peter pepper
     auto goPlayer = std::make_shared<dae::GameObject>("Player", playerControllerIndex);
-    goPlayer->AddComponent<dae::TextureComponent>("Sprites/PeterPepper.png");
+    auto textureSize = goPlayer->AddComponent<dae::TextureComponent>("Sprites/PeterPepper.png").GetSize();
 
     goPlayer->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth * 0.60f, dae::Minigin::m_WindowHeight * 0.50f);
+    goPlayer->AddComponent<dae::BoundingBoxComponent>(static_cast<float>(textureSize.x), static_cast<float>(textureSize.y));
     //goPlayer->AddComponent<dae::Transform>();
     //goPlayer->SetParent(goEnemy.get());
 
@@ -105,10 +107,11 @@ void load()
 
     //mr egg
     auto goEnemy = std::make_shared<dae::GameObject>("enemy", player2ControllerIndex);
-    goEnemy->AddComponent<dae::TextureComponent>("Sprites/MrEgg.png");
+    textureSize = goEnemy->AddComponent<dae::TextureComponent>("Sprites/MrEgg.png").GetSize();
 
     //todo: rethink world location / local pos
     goEnemy->AddComponent<dae::Transform>(dae::Minigin::m_WindowWidth * 0.40f, dae::Minigin::m_WindowHeight * 0.50f);
+    goEnemy->AddComponent<dae::BoundingBoxComponent>(static_cast<float>(textureSize.x), static_cast<float>(textureSize.y));
     auto& counterComp2 = goEnemy->AddComponent<dae::CounterComponent>();
     counterComp2.AddCounter("Lives", dae::CounterTypes::Lives, 3, false);
     counterComp2.AddCounter("Score", dae::CounterTypes::Score, 0, false);

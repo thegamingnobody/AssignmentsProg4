@@ -19,6 +19,7 @@
 #include "soundSystem.h"
 #include "ServiceLocator.h"
 #include "NullSoundSystem.h"
+#include "CollisionManager.h"
 
 std::unique_ptr<dae::SoundSystem> dae::ServiceLocator::m_SoundSystemInstance{ std::make_unique<dae::NullSoundSystem>() };
 
@@ -79,6 +80,8 @@ dae::Minigin::Minigin(const std::string &dataPath)
 	ResourceManager::GetInstance().Init(dataPath);
 
 	EventManager::GetInstance().Init();
+
+	CollisionManager::GetInstance().Init();
 }
 
 dae::Minigin::~Minigin()
@@ -97,6 +100,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 	auto& eventManager = EventManager::GetInstance();
+	auto& collisionManager = CollisionManager::GetInstance();
 
 	int constexpr targetFPS{ 165 };
 
@@ -122,6 +126,8 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		//	lag -= fixedTimeStep;
 		//}
 		sceneManager.Update(deltaTime);
+		collisionManager.CheckCollision();
+
 		renderer.Render();
 
 		const auto sleepTime{ currentTime + std::chrono::milliseconds(msPerFrame) - std::chrono::high_resolution_clock::now() };

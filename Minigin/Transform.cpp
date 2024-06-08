@@ -47,21 +47,32 @@ const glm::vec3& dae::Transform::GetPosition()
 	return m_WorldPosition;
 }
 
-void dae::Transform::SetPosition(float const x, float const y, float const z)
+void dae::Transform::SetPosition(float const x, float const y)
 {
 	m_LocalPosition.x = x;
 	m_LocalPosition.y = y;
-	m_LocalPosition.z = z;
+	m_LocalPosition.z = 0;
 	m_ShouldUpdate = true;
 }
 
-void dae::Transform::Move(float const addedX, float const addedY, float const addedZ)
+void dae::Transform::Move(float const addedX, float const addedY)
 {
 	m_ShouldUpdate = true;
 
 	m_DirectionThisFrame.x += addedX;
 	m_DirectionThisFrame.y += addedY;
-	m_DirectionThisFrame.z += addedZ;
+}
+
+void dae::Transform::ResetDirection(bool const resetX, bool const resetY)
+{
+	if (resetX)
+	{
+		m_DirectionThisFrame.x = 0;
+	}
+	if (resetY)
+	{
+		m_DirectionThisFrame.y = 0;
+	}
 }
 
 dae::Transform::Transform(dae::GameObject* object) 
@@ -77,15 +88,20 @@ dae::Transform::Transform(dae::GameObject* object)
 	dae::EventManager::GetInstance().AddObserver(this, dae::EventType::TransformChanged);
 }
 
-dae::Transform::Transform(dae::GameObject* object, float const x, float const y, float const z) 
+dae::Transform::Transform(dae::GameObject* object, float const x, float const y) 
 	: Component(object)
 	, m_ShouldUpdate(false)
 	, m_LocalPosition(glm::vec3(0, 0, 0))
-	, m_WorldPosition(glm::vec3(x, y, z))
+	, m_WorldPosition(glm::vec3(x, y, 0))
 	, m_DirectionThisFrame(glm::vec3(0, 0, 0))
 	, m_ParentWorldPos(glm::vec3(0, 0, 0))
 {
 	m_TargetNumber = object->m_PlayerNumber;
+
+	auto owner{ GetOwner() };
+	std::tuple<const dae::GameObject*, const glm::vec3&> eventTuple{ owner, m_WorldPosition };
+	Event eventToPush{ EventType::TransformChanged, eventTuple, GetOwner()->m_PlayerNumber };
+	dae::EventManager::GetInstance().PushEvent(eventToPush);
 
 	dae::EventManager::GetInstance().AddObserver(this, dae::EventType::MoveObject);
 	dae::EventManager::GetInstance().AddObserver(this, dae::EventType::TransformChanged);
@@ -98,7 +114,7 @@ void dae::Transform::Notify(const Event& event)
 	case dae::EventType::MoveObject:
 		{
 			auto castedArguments{ std::get<0>(event.GetArgumentsAsTuple<const glm::vec3&>()) };
-			Move(castedArguments.x, castedArguments.y, castedArguments.z);
+			Move(castedArguments.x, castedArguments.y);
 		}
 		break;
 	case dae::EventType::TransformChanged:

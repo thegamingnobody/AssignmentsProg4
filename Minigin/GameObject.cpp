@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "GameObject.h"
+#include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "TextComponent.h"
@@ -26,18 +27,6 @@ void dae::GameObject::Update(float const elapsedTime)
 	for (auto& component : m_pComponents)
 	{
 		component->Update(elapsedTime);
-	}
-
-	for (auto it{ m_pComponents.begin() }; it != m_pComponents.end(); it)
-	{
-		if ((*it)->GetSouldBeRemoved())
-		{
-			it = m_pComponents.erase(it);
-		}
-		else
-		{
-			++it;
-		}
 	}
 }
 

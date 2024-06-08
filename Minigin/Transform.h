@@ -16,15 +16,16 @@ namespace dae
 
 		void Reset();
 		const glm::vec3& GetPosition();
-		void SetPosition(float const x, float const y, float const z = 0);
+		void SetPosition(float const x, float const y);
 
 		void SetShouldUpdate(bool const shouldUpdate) { m_ShouldUpdate = shouldUpdate; }
 		bool GetShouldUpdate() const { return m_ShouldUpdate; }
 
-		void Move(float const addedX, float const addedY, float const addedZ = 0);
+		void Move(float const addedX, float const addedY);
+		void ResetDirection(bool const resetX, bool const resetY);
 
 		Transform(dae::GameObject* object);
-		Transform(dae::GameObject* object, float const x, float const y, float const z = 0);
+		Transform(dae::GameObject* object, float const x, float const y);
 
 		void Notify(const Event& event) override;
 
@@ -37,6 +38,8 @@ namespace dae
 		glm::vec3 m_DirectionThisFrame;
 
 		glm::vec3 m_ParentWorldPos;
+
+		glm::vec3 m_PredictedWorldPos;
 	};
 }
 
