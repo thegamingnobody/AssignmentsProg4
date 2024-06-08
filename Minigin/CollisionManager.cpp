@@ -3,6 +3,16 @@
 void dae::CollisionManager::Init()
 {
     m_NextId = 0;
+
+    dae::CollisionInfo collisionInfo;
+
+    collisionInfo.ResetX = false;
+    collisionInfo.ResetY = true;
+    m_CollisionInfoMap[std::make_tuple(ObjectType::Player, ObjectType::Platform)] = collisionInfo;
+
+    collisionInfo.ResetX = true;
+    collisionInfo.ResetY = false;
+    m_CollisionInfoMap[std::make_tuple(ObjectType::Player, ObjectType::Ladder)] = collisionInfo;
 }
 
 void dae::CollisionManager::RegisterBB(dae::BoundingBoxComponent* BB)
@@ -23,7 +33,8 @@ void dae::CollisionManager::CheckCollision()
         {
             if (AreColliding(box1, box2))
             {
-                box1->ResetDirectionThisFrame(true, true);
+                auto collisionInfo = m_CollisionInfoMap.find(std::make_tuple(ObjectType::Player, ObjectType::Platform))->second;
+                box1->ResetDirectionThisFrame(collisionInfo.ResetX, collisionInfo.ResetY);
                 box2->ResetDirectionThisFrame(true, true);
                 std::cout << "Collision\n";
             }

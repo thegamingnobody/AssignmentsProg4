@@ -171,12 +171,6 @@
     <ClInclude Include="NullSoundSystem.h">
       <Filter>Header Files\Managers\ServiceLocator\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="BoundingBoxComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionManager.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -283,12 +277,6 @@
     </ClCompile>
     <ClCompile Include="NullSoundSystem.cpp">
       <Filter>Source Files\Managers\ServiceLocator\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="BoundingBoxComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
-      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

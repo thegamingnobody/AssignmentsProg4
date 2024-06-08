@@ -179,6 +179,8 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Minigin\BoundingBoxComponent.cpp" />
+    <ClCompile Include="..\Minigin\CollisionManager.cpp" />
     <ClCompile Include="..\Minigin\CountersCommand.cpp" />
     <ClCompile Include="..\Minigin\CountersComponent.cpp" />
     <ClCompile Include="..\Minigin\MoveCommand.cpp" />
@@ -187,6 +189,8 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="PlayerState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Minigin\BoundingBoxComponent.h" />
+    <ClInclude Include="..\Minigin\CollisionManager.h" />
     <ClInclude Include="..\Minigin\CountersCommand.h" />
     <ClInclude Include="..\Minigin\CountersComponent.h" />
     <ClInclude Include="..\Minigin\MoveCommand.h" />

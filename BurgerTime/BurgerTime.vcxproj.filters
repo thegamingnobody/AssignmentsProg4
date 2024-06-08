@@ -45,6 +45,12 @@
     <ClCompile Include="PlayerState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Minigin\CollisionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Minigin\BoundingBoxComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Minigin\CountersComponent.h">
@@ -60,6 +66,12 @@
       <Filter>Header Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="PlayerState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Minigin\CollisionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Minigin\BoundingBoxComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

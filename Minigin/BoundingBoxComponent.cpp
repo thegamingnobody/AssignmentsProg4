@@ -5,11 +5,12 @@
 #include "CollisionManager.h"
 
 
-dae::BoundingBoxComponent::BoundingBoxComponent(dae::GameObject* object, float const width, float const height)
+dae::BoundingBoxComponent::BoundingBoxComponent(dae::GameObject* object, float const width, float const height, const ObjectType& objectType)
 	: Component(object)
 	, m_BoundingBox()
 	, m_BoxId(0)
 	, m_MovedThisFrame(false)
+	, m_ObjectType(objectType)
 {
 	m_TargetNumber = object->m_PlayerNumber;
 

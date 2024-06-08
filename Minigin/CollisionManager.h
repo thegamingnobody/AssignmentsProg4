@@ -3,14 +3,24 @@
 #include <vector>
 #include "BoundingBoxComponent.h"
 #include "Event.h"
+#include <map>
 
 
 
 namespace dae
 {
-	class CollisionManager : public Singleton<CollisionManager>
+	struct CollisionInfo
+	{
+		bool ResetX;
+		bool ResetY;
+	};
+
+
+	class CollisionManager final : public Singleton<CollisionManager>
 	{
 	public:
+		typedef std::tuple<ObjectType, ObjectType> ObjectTuple;
+
 
 		void Init();
 
@@ -26,6 +36,8 @@ namespace dae
 
 		std::vector<BoundingBoxComponent*> m_BoundingBoxes;
 		int m_NextId;
+
+		std::map<ObjectTuple, CollisionInfo> m_CollisionInfoMap;
 	};
 }
 

@@ -12,12 +12,18 @@ namespace dae
         float height;
     };
 
-
+    enum class ObjectType
+    {
+        Player,
+        Enemy,
+        Platform,
+        Ladder
+    };
 
     class BoundingBoxComponent : public Component, public Observer
     {
     public:
-        BoundingBoxComponent(dae::GameObject* object, float const width, float const height);
+        BoundingBoxComponent(dae::GameObject* object, float const width, float const height, const ObjectType& objectType);
         virtual ~BoundingBoxComponent() override = default;
         BoundingBoxComponent(const BoundingBoxComponent& other) = delete;
         BoundingBoxComponent(BoundingBoxComponent&& other) = delete;
@@ -40,6 +46,8 @@ namespace dae
 
         int m_BoxId;
         bool m_MovedThisFrame;
+
+        ObjectType m_ObjectType;
     };
 }
 

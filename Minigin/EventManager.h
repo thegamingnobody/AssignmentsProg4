@@ -11,7 +11,7 @@
 
 namespace dae
 {
-	class EventManager : public Singleton<EventManager>
+	class EventManager final : public Singleton<EventManager>
 	{
 	public:
 		void Init();
